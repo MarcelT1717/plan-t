@@ -13,7 +13,7 @@ export const Footer = () => {
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/logo.png" alt="Plan T Logo" className="w-10 h-10" />
+              <img src="/logo.png" alt="Plan T Logo" className="h-10 w-auto object-contain" />
               <span className="text-2xl font-bold text-white">
                 PLAN <span className="text-amber-500">T</span>
               </span>
@@ -78,12 +78,12 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                <a href="/Privacy Policy for Plan T.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transition-colors duration-300">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-amber-400 transition-colors duration-300">
+                <a href="/Terms of Service for Plan T.pdf" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-amber-400 transition-colors duration-300">
                   Terms of Service
                 </a>
               </li>

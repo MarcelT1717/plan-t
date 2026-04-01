@@ -41,13 +41,11 @@ export const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative w-12 h-12">
-              <img 
-                src="/logo.png" 
-                alt="Project T Logo" 
-                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-              />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Project T Logo"
+              className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
+            />
             <span className="text-2xl font-bold text-white tracking-wider">
               PLAN <span className="text-amber-500">T</span>
             </span>
