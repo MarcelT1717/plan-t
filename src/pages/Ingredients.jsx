@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock, Leaf, Award, Heart, Sparkles } from 'lucide-react';
 import { ingredientsData } from '../mock';
+import { MailchimpSignup } from '../components/MailchimpSignup';
 
 export const Ingredients = () => {
   return (
@@ -30,6 +31,64 @@ export const Ingredients = () => {
             Join our waitlist to be the first to know when T-Bar launches.
           </p>
 
+        </div>
+      </section>
+
+      {/* Transition */}
+      <div className="relative h-24 bg-black overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black to-transparent" />
+      </div>
+
+      {/* Photo Gallery — Ingredients & Product */}
+      <section className="relative py-0 bg-black">
+        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
+        <div className="grid grid-cols-1 md:grid-cols-2 min-h-[60vh]">
+          {/* Raw Ingredients */}
+          <div className="relative overflow-hidden group">
+            <img
+              src="/IMG_3781.jpeg"
+              alt="Raw T-Bar ingredients laid out — beets, almonds, dates, pumpkin seeds, and beetroot powder"
+              className="w-full h-full object-cover object-center brightness-75 group-hover:brightness-90 group-hover:scale-105 transition-all duration-700"
+              style={{ minHeight: '480px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 md:p-10">
+              <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-2">The Formula</p>
+              <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">
+                Pure. Natural.<br />Purposeful.
+              </h3>
+              <p className="text-gray-300 text-sm max-w-xs leading-relaxed">
+                Every ingredient sourced for a reason — from whole beets to raw almonds, dates, pumpkin seeds, and concentrated beetroot powder.
+              </p>
+            </div>
+            <div className="absolute top-6 right-6 px-3 py-1.5 bg-black/60 border border-amber-500/30 backdrop-blur-sm">
+              <span className="text-amber-400 text-xs font-mono tracking-widest uppercase">Ingredients</span>
+            </div>
+          </div>
+
+          {/* Finished Bars */}
+          <div className="relative overflow-hidden group">
+            <img
+              src="/IMG_3795.jpeg"
+              alt="Plan T Red bars in packaging, ready to ship"
+              className="w-full h-full object-cover object-center brightness-75 group-hover:brightness-90 group-hover:scale-105 transition-all duration-700"
+              style={{ minHeight: '480px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8 md:p-10">
+              <p className="text-amber-400 text-xs font-bold tracking-[0.25em] uppercase mb-2">The Product</p>
+              <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-2">
+                Handcrafted.<br />Small Batch.
+              </h3>
+              <p className="text-gray-300 text-sm max-w-xs leading-relaxed">
+                Made with care in small batches. Every T-Bar delivers the same uncompromising quality — no shortcuts, no fillers.
+              </p>
+            </div>
+            <div className="absolute top-6 right-6 px-3 py-1.5 bg-black/60 border border-amber-500/30 backdrop-blur-sm">
+              <span className="text-amber-400 text-xs font-mono tracking-widest uppercase">T-Bar Red</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -231,17 +290,17 @@ export const Ingredients = () => {
 
       {/* CTA Section */}
       <section className="py-32 bg-black">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Be the First to Know
           </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-            T-Bar is currently in development. Join our waitlist to get exclusive early access, 
+          <p className="text-xl text-gray-300 mb-10 max-w-xl mx-auto">
+            T-Bar is currently in development. Join our waitlist to get exclusive early access,
             special launch pricing, and updates on our progress.
           </p>
-          <p className="text-gray-500 text-sm">
-            In the meantime, subscribe to our newsletter for testosterone optimization tips and insights.
-          </p>
+          <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-3xl p-8 md:p-10">
+            <MailchimpSignup />
+          </div>
         </div>
       </section>
     </div>
