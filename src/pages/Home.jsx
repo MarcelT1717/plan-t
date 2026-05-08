@@ -124,33 +124,23 @@ export const Home = () => {
       {/* Stats Section */}
       <section className="relative -mt-5 z-20 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group relative p-10 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border border-red-500/30 rounded-2xl hover:border-red-500/60 transition-all duration-300 hover:scale-105 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 to-amber-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative z-10 text-center">
-                <TrendingDown className="w-14 h-14 text-red-400 mx-auto mb-4" />
-                <div className="text-5xl md:text-6xl font-bold text-white mb-3">25%</div>
-                <div className="text-gray-300 text-lg">Decrease Since 1980</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { icon: TrendingDown, value: '25%',  label: 'Decrease Since 1980',  sub: 'vs. 1980 baseline' },
+              { icon: Activity,     value: '420',   label: 'Avg. ng/dL Today',     sub: 'normal: 300–1000' },
+              { icon: Flame,        value: '605',   label: '1980 Avg. ng/dL',      sub: 'a generation ago' },
+            ].map(({ icon: Icon, value, label, sub }) => (
+              <div key={label} className="group relative bg-zinc-950 border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 overflow-hidden shadow-2xl">
+                <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                <div className="p-8 text-center">
+                  <p className="text-amber-500/60 text-[9px] font-bold tracking-[0.3em] uppercase mb-4">{sub}</p>
+                  <div className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight">{value}</div>
+                  <div className="h-px bg-amber-500/15 mx-8 my-3" />
+                  <div className="text-gray-400 text-xs font-bold tracking-[0.15em] uppercase">{label}</div>
+                </div>
+                <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
               </div>
-            </div>
-
-            <div className="group relative p-10 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl hover:border-amber-500/60 transition-all duration-300 hover:scale-105 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-amber-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative z-10 text-center">
-                <Activity className="w-14 h-14 text-amber-400 mx-auto mb-4" />
-                <div className="text-5xl md:text-6xl font-bold text-white mb-3">420</div>
-                <div className="text-gray-300 text-lg">Average ng/dL Today</div>
-              </div>
-            </div>
-
-            <div className="group relative p-10 bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl hover:border-amber-500/60 transition-all duration-300 hover:scale-105 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-red-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative z-10 text-center">
-                <Flame className="w-14 h-14 text-amber-400 mx-auto mb-4" />
-                <div className="text-5xl md:text-6xl font-bold text-white mb-3">605</div>
-                <div className="text-gray-300 text-lg">1980 Average ng/dL</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -396,6 +386,85 @@ export const Home = () => {
               })}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* T-Bar RED Product Teaser */}
+      <section className="py-24 bg-black border-y border-amber-500/10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+            {/* Packaging visual */}
+            <div className="relative">
+              {/* Wrapper-style frame */}
+              <div className="relative bg-zinc-950 border border-amber-500/40 overflow-hidden shadow-2xl shadow-amber-900/10">
+                <div className="h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                <img
+                  src="/IMG_3795.jpeg"
+                  alt="T-Bar RED"
+                  className="w-full h-72 object-cover object-center brightness-75"
+                />
+                {/* Overlay with product label */}
+                <div className="absolute inset-0 top-[3px] bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent flex items-end p-6">
+                  <div className="flex items-end justify-between w-full">
+                    <div>
+                      <img src="/logo.png" alt="Plan T" className="h-7 w-auto mb-2 opacity-90" />
+                      <p className="text-amber-500/60 text-[10px] font-bold tracking-[0.25em] uppercase">Whole Food Nutrition Bar</p>
+                    </div>
+                    <span className="text-amber-400 font-black text-2xl tracking-[0.2em] leading-none uppercase">T-Bar</span>
+                  </div>
+                </div>
+                <div className="h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+              </div>
+
+              {/* Small wrapper tiles below */}
+              <div className="grid grid-cols-4 gap-2 mt-2">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="bg-zinc-950 border border-amber-500/20 overflow-hidden">
+                    <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                    <div className="px-2 py-2 flex items-center justify-between">
+                      <span className="text-amber-500/50 text-[8px] font-bold tracking-widest uppercase">Plan T</span>
+                      <span className="text-amber-400/70 font-black text-[8px] tracking-widest uppercase">T-Bar</span>
+                    </div>
+                    <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Text content */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="h-px w-8 bg-amber-500/50" />
+                <span className="text-amber-500 text-xs font-bold tracking-[0.25em] uppercase">Introducing</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-black text-white mb-8 leading-none tracking-tight">
+                T-Bar
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Six whole-food ingredients. Zero artificial additives. No fillers, no shortcuts — just real food,
+                made with intention and handcrafted in small batches.
+              </p>
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[['100%', 'Natural'], ['6', 'Ingredients'], ['0', 'Fillers']].map(([val, label]) => (
+                  <div key={label} className="border border-amber-500/20 p-3 text-center bg-zinc-950/50">
+                    <p className="text-amber-400 font-black text-2xl leading-none">{val}</p>
+                    <p className="text-gray-500 text-xs tracking-widest uppercase mt-1">{label}</p>
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => navigate('/ingredients')}
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 hover:scale-105"
+              >
+                <span>See the Full Bar</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

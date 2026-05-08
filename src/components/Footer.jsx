@@ -56,8 +56,8 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/ingredients" className="text-gray-400 hover:text-amber-400 transition-colors duration-300">
-                  The Bar (Coming Soon)
+                <Link to="/ingredients" className="text-gray-400 hover:text-amber-400 transition-colors duration-300 inline-flex items-center gap-2">
+                  The Bar <span className="text-amber-400 font-bold text-[9px] tracking-[0.2em] border border-amber-500/30 px-1.5 py-0.5 uppercase">New</span>
                 </Link>
               </li>
             </ul>

@@ -39,30 +39,27 @@ export const ingredientsData = [
     id: 1,
     number: "01",
     name: "BEETROOT",
-    compound: "Nitric Oxide Precursors",
-    description: "Rich in dietary nitrates that convert to nitric oxide, significantly enhancing cardiovascular performance and supports the endocrine system's natural hormone production pathways.",
-    benefits: ["Enhances circulation", "Increases stamina", "Supports cardiovascular health"],
+    compound: "Dietary Nitrates",
+    description: "Earthy, naturally sweet, and vibrantly coloured. Whole beetroot brings a rich, complex depth to every bar and is minimally processed to preserve its natural character.",
     nutrients: ["NITRATES", "FOLATE", "IRON", "VITAMIN C"],
     image: "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwzfHxiZWV0c3xlbnwwfHx8fDE3NzMyNzE1MzB8MA&ixlib=rb-4.1.0&q=85"
   },
   {
     id: 2,
-    name: "SPINACH",
+    name: "ALMONDS",
     number: "02",
-    compound: "Magnesium & Zinc",
-    description: "A powerhouse of minerals essential for hormone production. Spinach delivers magnesium and zinc — two minerals directly correlated with testosterone levels in clinical studies.",
-    benefits: ["Boosts testosterone", "Rich in minerals", "Supports muscle function"],
-    nutrients: ["MAGNESIUM", "ZINC", "IRON", "VITAMIN K"],
+    compound: "Healthy Fats & Vitamin E",
+    description: "Buttery, satisfying, and naturally filling. Whole almonds add texture and a clean, mild flavour while contributing a dense concentration of naturally occurring nutrients.",
+    nutrients: ["VITAMIN E", "HEALTHY FATS", "MAGNESIUM", "PROTEIN"],
     image: "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwyfHxzcGluYWNofGVufDB8fHx8MTc3MzI3MTUzM3ww&ixlib=rb-4.1.0&q=85"
   },
   {
     id: 3,
-    name: "POMEGRANATE",
+    name: "DATES",
     number: "03",
-    compound: "Ellagic Acid",
-    description: "Ancient superfruit packed with punicalagins and ellagic acid. Research shows pomegranate can increase salivary testosterone levels by an average of 24% while reducing cortisol.",
-    benefits: ["Increases testosterone", "Reduces cortisol", "Antioxidant power"],
-    nutrients: ["ELLAGIC ACID", "PUNICALAGINS", "VITAMIN C", "POTASSIUM"],
+    compound: "Natural Sugars & Fibre",
+    description: "Naturally caramel-sweet and chewy, dates are a whole-food source of energy and fibre. Used as the bar's primary binder, they give the T-Bar its distinctive texture without refined sweeteners.",
+    nutrients: ["NATURAL SUGARS", "FIBRE", "POTASSIUM", "MAGNESIUM"],
     image: "https://images.unsplash.com/photo-1663961355715-cf362778dc0e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwyfHxiZWV0c3xlbnwwfHx8fDE3NzMyNzE1MzB8MA&ixlib=rb-4.1.0&q=85"
   },
   {
@@ -70,8 +67,7 @@ export const ingredientsData = [
     name: "PUMPKIN SEEDS",
     number: "04",
     compound: "Zinc & Omega Fatty Acids",
-    description: "Loaded with zinc and essential fatty acids that support optimal testosterone production. Contains phytosterols that help maintain healthy hormone balance.",
-    benefits: ["Hormone optimization", "Prostate health", "Zinc delivery"],
+    description: "Lightly nutty with a satisfying crunch. Pumpkin seeds are a whole-food ingredient with a long culinary history, contributing healthy fats and minerals in every bite.",
     nutrients: ["ZINC", "OMEGA-3", "MAGNESIUM", "VITAMIN E"],
     image: "https://images.unsplash.com/photo-1542990253-a781e04c0082?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxzdXBlcmZvb2RzfGVufDB8fHx8MTc3MzI3MTUzN3ww&ixlib=rb-4.1.0&q=85"
   },
@@ -80,8 +76,7 @@ export const ingredientsData = [
     name: "GINGER ROOT",
     number: "05",
     compound: "Gingerol & Shogaol",
-    description: "Bioactive compounds that enhance testosterone synthesis and reduce inflammation. Studies show ginger can increase testosterone by up to 17% while improving sperm quality.",
-    benefits: ["T-boosting compounds", "Anti-inflammatory", "Metabolic support"],
+    description: "Warm, spicy, and unmistakably aromatic. Ginger root has been a culinary staple for thousands of years across Asian, South Asian, and Middle Eastern cooking traditions.",
     nutrients: ["GINGEROL", "SHOGAOL", "ANTIOXIDANTS", "MINERALS"],
     image: "https://images.unsplash.com/photo-1494597564530-871f2b93ac55?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwyfHxzdXBlcmZvb2RzfGVufDB8fHx8MTc3MzI3MTUzN3ww&ixlib=rb-4.1.0&q=85"
   },
@@ -90,8 +85,7 @@ export const ingredientsData = [
     name: "DARK CACAO",
     number: "06",
     compound: "Flavonoids & Theobromine",
-    description: "Rich in flavonoids that improve blood flow and contain mood-enhancing compounds. Dark cacao supports cardiovascular health and provides sustained energy without crashes.",
-    benefits: ["Enhances blood flow", "Mood elevation", "Sustained energy"],
+    description: "Deeply rich and slightly bitter, dark cacao gives the T-Bar its signature chocolate character. Minimally processed to retain its full spectrum of naturally occurring flavour compounds.",
     nutrients: ["FLAVONOIDS", "THEOBROMINE", "MAGNESIUM", "IRON"],
     image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwxfHxzcGluYWNofGVufDB8fHx8MTc3MzI3MTUzM3ww&ixlib=rb-4.1.0&q=85"
   }

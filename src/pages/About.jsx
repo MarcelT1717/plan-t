@@ -209,27 +209,24 @@ export const About = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-2xl p-8 text-center">
-                <Leaf className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-                <h3 className="text-white font-bold text-2xl mb-2">6</h3>
-                <p className="text-gray-400 text-sm">Key Ingredients</p>
-              </div>
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-2xl p-8 text-center mt-8">
-                <BookOpen className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-                <h3 className="text-white font-bold text-2xl mb-2">Peer</h3>
-                <p className="text-gray-400 text-sm">Reviewed Research</p>
-              </div>
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-2xl p-8 text-center -mt-8">
-                <Zap className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-                <h3 className="text-white font-bold text-2xl mb-2">100%</h3>
-                <p className="text-gray-400 text-sm">Natural Formula</p>
-              </div>
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-2xl p-8 text-center">
-                <Shield className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-                <h3 className="text-white font-bold text-2xl mb-2">Zero</h3>
-                <p className="text-gray-400 text-sm">Compromise</p>
-              </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { icon: Leaf,     value: '6',      label: 'Key Ingredients',   offset: '' },
+                { icon: BookOpen, value: 'Peer',   label: 'Reviewed Research', offset: 'mt-6' },
+                { icon: Zap,      value: '100%',   label: 'Natural Formula',   offset: '-mt-6' },
+                { icon: Shield,   value: 'Zero',   label: 'Compromise',        offset: '' },
+              ].map(({ icon: Icon, value, label, offset }) => (
+                <div key={label} className={`bg-zinc-950 border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 overflow-hidden ${offset}`}>
+                  <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                  <div className="p-6 text-center">
+                    <Icon className="w-8 h-8 text-amber-400 mx-auto mb-3" />
+                    <div className="h-px bg-amber-500/15 mx-4 mb-3" />
+                    <h3 className="text-white font-black text-xl tracking-tight mb-1">{value}</h3>
+                    <p className="text-gray-500 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
+                  </div>
+                  <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/15 to-transparent" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -297,24 +294,23 @@ export const About = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 border border-red-500/30 rounded-2xl p-8 text-center">
-              <TrendingDown className="w-12 h-12 text-red-400 mx-auto mb-4" />
-              <h3 className="text-3xl font-bold text-white mb-2">1%</h3>
-              <p className="text-gray-400">Annual decline rate</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 border border-amber-500/30 rounded-2xl p-8 text-center">
-              <Activity className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-              <h3 className="text-3xl font-bold text-white mb-2">300-1000</h3>
-              <p className="text-gray-400">Normal range (ng/dL)</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/50 border border-amber-500/30 rounded-2xl p-8 text-center">
-              <Leaf className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-              <h3 className="text-3xl font-bold text-white mb-2">6</h3>
-              <p className="text-gray-400">T-supporting key ingredients</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              { icon: TrendingDown, value: '1%',      label: 'Annual Decline Rate' },
+              { icon: Activity,     value: '300–1000', label: 'Normal Range (ng/dL)' },
+              { icon: Leaf,         value: '6',        label: 'T-Supporting Ingredients' },
+            ].map(({ icon: Icon, value, label }) => (
+              <div key={label} className="bg-zinc-950 border border-amber-500/20 overflow-hidden text-center">
+                <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                <div className="p-8">
+                  <Icon className="w-10 h-10 text-amber-400 mx-auto mb-4" />
+                  <div className="h-px bg-amber-500/15 mx-6 mb-4" />
+                  <h3 className="text-3xl font-black text-white tracking-tight mb-2">{value}</h3>
+                  <p className="text-gray-500 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
+                </div>
+                <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/15 to-transparent" />
+              </div>
+            ))}
           </div>
         </div>
       </section>

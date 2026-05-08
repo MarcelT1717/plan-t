@@ -28,7 +28,7 @@ export const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
-    { path: '/ingredients', label: 'The Bar' }
+    { path: '/ingredients', label: 'The Bar', badge: 'New' }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -57,13 +57,18 @@ export const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
-                  isActive(link.path) 
-                    ? 'text-amber-500' 
+                className={`relative flex items-center gap-2 text-sm font-medium tracking-wide transition-colors duration-300 ${
+                  isActive(link.path)
+                    ? 'text-amber-500'
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {link.label}
+                {link.badge && (
+                  <span className="text-amber-400 font-bold text-[9px] tracking-[0.2em] leading-none border border-amber-500/30 px-1.5 py-0.5 uppercase">
+                    {link.badge}
+                  </span>
+                )}
                 {isActive(link.path) && (
                   <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-500 to-amber-600"></span>
                 )}
@@ -93,13 +98,18 @@ export const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block text-base font-medium transition-colors duration-300 ${
-                  isActive(link.path) 
-                    ? 'text-amber-500' 
+                className={`flex items-center gap-2 text-base font-medium transition-colors duration-300 ${
+                  isActive(link.path)
+                    ? 'text-amber-500'
                     : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {link.label}
+                {link.badge && (
+                  <span className="text-amber-400 font-bold text-[9px] tracking-[0.2em] border border-amber-500/30 px-1.5 py-0.5 uppercase">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             ))}
             <button onClick={handleSubscribeClick} className="w-full px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-amber-500/50 transition-all duration-300">
