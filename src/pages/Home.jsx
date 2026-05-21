@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, TrendingDown, Activity, Flame, Leaf, Award, Heart, Sparkles } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '../components/ui/carousel';
+import { ArrowRight, TrendingDown, Activity, Flame, Leaf, Sparkles } from 'lucide-react';
 import { MailchimpSignup } from '../components/MailchimpSignup';
-import { ingredientsData } from '../mock';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ export const Home = () => {
       }
     } catch (error) {
       console.error('Error fetching campaigns:', error);
-      // Keep placeholder data if fetch fails
     } finally {
       setLoadingCampaigns(false);
     }
@@ -68,317 +66,398 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background image */}
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1609307446757-488da3c17b40?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHw0fHxwcm90ZWluJTIwYmFyfGVufDB8fHxibGFja3wxNzczMjcxNDk2fDA&ixlib=rb-4.1.0&q=85"
-            alt="Background"
+            alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black"></div>
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute inset-0 bg-black/75" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
-          <div className="space-y-8">
-            <div className="inline-flex items-center space-x-2 px-6 py-3 bg-red-500/10 border border-red-500/30 rounded-full backdrop-blur-sm">
-              <TrendingDown className="w-5 h-5 text-red-400" />
-              <span className="text-red-400 text-sm font-semibold tracking-wide">CRISIS ALERT</span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
-              <span className="text-white block mb-4">Testosterone Levels Are</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-amber-400 block">
-                Plummeting
-              </span>
-            </h1>
+        {/* Ambient glows over image */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-0 w-[700px] h-[700px] bg-amber-500/10 rounded-full blur-[160px]" />
+          <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-amber-600/10 rounded-full blur-[160px]" />
+        </div>
 
-            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              Men's testosterone has dropped <span className="text-red-400 font-bold">25% since 1980</span>. 
-              We're on a mission to spread awareness and empower men with knowledge.
-            </p>
+        {/* Top strip */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
-              <button 
-                onClick={() => navigate('/about')}
-                className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-black text-lg font-bold rounded-lg hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2"
-              >
-                <span>Join The Plan</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-              <button
-                onClick={() => document.getElementById('subscribe').scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-5 bg-white/10 backdrop-blur-md border-2 border-amber-400/50 text-white text-lg font-bold rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105"
-              >
-                Subscribe
-              </button>
-            </div>
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-36 pb-24">
+
+          {/* Label */}
+          <div className="inline-flex items-center gap-3 mb-12">
+            <div className="h-px w-10 bg-amber-500/40" />
+            <span className="text-amber-500/70 text-[10px] font-bold tracking-[0.35em] uppercase">Since 1980 · Men's Health</span>
+            <div className="h-px w-10 bg-amber-500/40" />
+          </div>
+
+          {/* Headline */}
+          <h1 className="font-black leading-none tracking-tight mb-10">
+            <span className="block text-white text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] mb-2">Testosterone</span>
+            <span className="block text-white text-6xl sm:text-7xl md:text-8xl lg:text-[7rem] mb-2">Is In</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-6xl sm:text-7xl md:text-8xl lg:text-[7rem]">
+              Decline.
+            </span>
+          </h1>
+
+          {/* Divider */}
+          <div className="flex justify-center mb-10">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent" />
+          </div>
+
+          {/* Subtext */}
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-14 leading-relaxed">
+            Men's testosterone has dropped{' '}
+            <span className="text-white font-semibold">25% since 1980</span>.
+            We're raising awareness and empowering men with the knowledge to understand why.
+          </p>
+
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => navigate('/about')}
+              className="group inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold tracking-wide hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-300"
+            >
+              Join The Plan
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              onClick={() => document.getElementById('subscribe').scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center px-10 py-4 border border-amber-500/30 text-amber-400 font-bold tracking-wide hover:border-amber-500/60 hover:bg-amber-500/5 transition-all duration-300"
+            >
+              Subscribe
+            </button>
           </div>
         </div>
 
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </section>
 
-      {/* Stats Section */}
-      <section className="relative -mt-5 z-20 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {/* ── Stats Strip ────────────────────────────────────────────────── */}
+      <section className="bg-black py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-0">
             {[
-              { icon: TrendingDown, value: '25%',  label: 'Decrease Since 1980',  sub: 'vs. 1980 baseline' },
-              { icon: Activity,     value: '420',   label: 'Avg. ng/dL Today',     sub: 'normal: 300–1000' },
-              { icon: Flame,        value: '605',   label: '1980 Avg. ng/dL',      sub: 'a generation ago' },
-            ].map(({ icon: Icon, value, label, sub }) => (
-              <div key={label} className="group relative bg-zinc-950 border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 overflow-hidden shadow-2xl">
-                <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-                <div className="p-8 text-center">
-                  <p className="text-amber-500/60 text-[9px] font-bold tracking-[0.3em] uppercase mb-4">{sub}</p>
-                  <div className="text-5xl md:text-6xl font-black text-white mb-2 tracking-tight">{value}</div>
-                  <div className="h-px bg-amber-500/15 mx-8 my-3" />
-                  <div className="text-gray-400 text-xs font-bold tracking-[0.15em] uppercase">{label}</div>
+              { value: '25%',  label: 'Decrease Since 1980',  sub: 'vs. 1980 baseline' },
+              { value: '420',  label: 'Avg. ng/dL Today',     sub: 'normal range: 300–1000' },
+              { value: '1%',   label: 'Annual Decline Rate',  sub: 'per year, ongoing' },
+            ].map(({ value, label, sub }, i) => (
+              <React.Fragment key={label}>
+                {i > 0 && (
+                  <div className="hidden md:block w-px h-16 bg-gray-800 mx-10 flex-shrink-0" />
+                )}
+                {i > 0 && (
+                  <div className="md:hidden h-px w-16 bg-gray-800 my-8" />
+                )}
+                <div className="text-center">
+                  <p className="text-gray-700 text-[9px] font-bold tracking-[0.3em] uppercase mb-3">{sub}</p>
+                  <p className="text-5xl md:text-6xl font-black text-white tracking-tight mb-2">{value}</p>
+                  <p className="text-gray-600 text-[10px] font-bold tracking-[0.2em] uppercase">{label}</p>
                 </div>
-                <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
-              </div>
+              </React.Fragment>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testosterone Decline Chart Section */}
-      <section className="py-32 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden border-y border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              The Declining <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-400">Trend</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Research shows a consistent decline in average testosterone levels across all age groups over the past four decades.
-            </p>
+      {/* ── The Decline ────────────────────────────────────────────────── */}
+      <section className="py-32 bg-black border-b border-gray-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">The Data</span>
+            <div className="h-px flex-1 bg-gray-900" />
           </div>
 
-          {/* Enhanced Chart */}
-          <div className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-sm border-2 border-red-500/30 rounded-3xl p-8 md:p-12 mb-8 shadow-2xl">
-            <div className="relative h-[500px]">
-              {/* Y-axis */}
-              <div className="absolute left-0 top-0 bottom-12 flex flex-col justify-between text-gray-400 text-sm font-semibold pr-6 w-20">
-                <span className="text-amber-400">700</span>
-                <span>600</span>
-                <span>500</span>
-                <span>400</span>
-                <span className="text-red-400">300</span>
-              </div>
-
-              {/* Chart area */}
-              <div className="ml-20 mr-4 h-full relative pb-12">
-                {/* Grid lines */}
-                <div className="absolute inset-0 flex flex-col justify-between pb-12">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="border-t border-gray-800"></div>
-                  ))}
-                </div>
-
-                {/* Enhanced SVG Chart */}
-                <svg className="absolute inset-0 w-full h-full pb-12" preserveAspectRatio="none" viewBox="0 0 100 100">
-                  <defs>
-                    <linearGradient id="strokeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#F59E0B" />
-                      <stop offset="50%" stopColor="#F97316" />
-                      <stop offset="100%" stopColor="#EF4444" />
-                    </linearGradient>
-                    <linearGradient id="fillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="#EF4444" stopOpacity="0.05" />
-                    </linearGradient>
-                    <filter id="glow">
-                      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                      <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  
-                  {/* Area fill */}
-                  <path
-                    d="M 0,15 L 20,20 L 40,30 L 60,45 L 80,65 L 100,80 L 100,100 L 0,100 Z"
-                    fill="url(#fillGradient)"
-                  />
-                  
-                  {/* Main decline line */}
-                  <path
-                    d="M 0,15 L 20,20 L 40,30 L 60,45 L 80,65 L 100,80"
-                    fill="none"
-                    stroke="url(#strokeGradient)"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    filter="url(#glow)"
-                  />
-                  
-                  {/* Data point circles with different colors */}
-                  <circle cx="0" cy="15" r="6" fill="#F59E0B" className="drop-shadow-lg" />
-                  <circle cx="20" cy="20" r="6" fill="#F59E0B" className="drop-shadow-lg" />
-                  <circle cx="40" cy="30" r="6" fill="#F97316" className="drop-shadow-lg" />
-                  <circle cx="60" cy="45" r="6" fill="#F97316" className="drop-shadow-lg" />
-                  <circle cx="80" cy="65" r="6" fill="#EF4444" className="drop-shadow-lg" />
-                  <circle cx="100" cy="80" r="6" fill="#DC2626" className="drop-shadow-lg" />
-                </svg>
-
-                {/* X-axis labels */}
-                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-gray-400 text-sm font-semibold">
-                  <span>1980</span>
-                  <span>1990</span>
-                  <span>2000</span>
-                  <span>2010</span>
-                  <span>2020</span>
-                  <span>2024</span>
-                </div>
-
-                {/* Value labels above points */}
-                <div className="absolute inset-0">
-                  {[
-                    { x: 0, y: 15, label: "605", color: "text-amber-400" },
-                    { x: 20, y: 20, label: "580", color: "text-amber-400" },
-                    { x: 40, y: 30, label: "550", color: "text-amber-400" },
-                    { x: 60, y: 45, label: "510", color: "text-amber-400" },
-                    { x: 80, y: 65, label: "450", color: "text-red-400" },
-                    { x: 100, y: 80, label: "420", color: "text-red-500" }
-                  ].map((data, index) => (
-                    <div
-                      key={index}
-                      className="absolute transform -translate-x-1/2 -translate-y-full"
-                      style={{ left: `${data.x}%`, top: `${data.y}%` }}
-                    >
-                      <div className="mb-2 text-center">
-                        <span className={`${data.color} font-bold text-lg bg-black/80 px-3 py-1.5 rounded-lg border border-current/30 backdrop-blur-sm shadow-lg`}>
-                          {data.label}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Y-axis label */}
-                <div className="absolute -left-16 top-1/2 -translate-y-1/2 -rotate-90 text-gray-500 text-xs font-semibold tracking-wider whitespace-nowrap">
-                  TESTOSTERONE (ng/dL)
-                </div>
-              </div>
-            </div>
-
-            {/* Chart caption and source */}
-            <div className="mt-8 pt-6 border-t border-gray-800">
-              <p className="text-center text-gray-400 mb-4 leading-relaxed">
-                This dramatic decline affects energy levels, muscle mass, mood, libido, and overall quality of life. 
-                Understanding this trend is the first step toward reclaiming male vitality.
+          {/* Intro text */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-end mb-14">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-8">
+                A Generation of <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Silent Decline</span>
+              </h2>
+              <p className="text-gray-400 text-base leading-relaxed mb-6">
+                Research shows a consistent, year-on-year drop in average testosterone across all age groups.
+                Young men today have significantly lower testosterone than men of the same age a generation ago.
               </p>
-              <div className="text-center">
-                <a 
-                  href="https://academic.oup.com/jcem/article/92/1/196/2598434" 
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Environmental toxins, sedentary lifestyles, ultra-processed diets, and chronic stress all
+                contribute to a trend that cuts across age groups and geographies.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              {[
+                { value: '25%',      label: 'Average decline since 1980',  color: 'text-amber-400' },
+                { value: '~1%',      label: 'Drop per year, ongoing',      color: 'text-orange-400' },
+                { value: '420 ng/dL', label: 'Average level today',        color: 'text-red-400' },
+              ].map(({ value, label, color }) => (
+                <div key={label} className="flex items-center justify-between border-b border-gray-900 pb-3 last:border-0 last:pb-0">
+                  <span className="text-gray-600 text-xs tracking-wide">{label}</span>
+                  <span className={`${color} font-black text-lg tracking-tight`}>{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Chart card */}
+          <div className="bg-zinc-950/70 rounded-2xl overflow-hidden">
+            <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+
+            <div className="px-6 pt-6 pb-4">
+              {/* Chart header */}
+              <div className="flex items-center justify-between mb-6">
+                <p className="text-gray-700 text-[9px] font-bold tracking-[0.3em] uppercase">
+                  Average Testosterone Level (ng/dL) · 1980–Present
+                </p>
+                <a
+                  href="https://academic.oup.com/jcem/article/92/1/196/2598434"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-amber-400 hover:text-amber-300 transition-colors duration-300"
+                  className="text-gray-800 hover:text-gray-600 text-[9px] font-mono tracking-widest uppercase transition-colors"
                 >
-                  <span className="mr-2">📊</span>
-                  <span>Source: Journal of Clinical Endocrinology & Metabolism</span>
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                  JCEM Source ↗
                 </a>
               </div>
+
+              {/* SVG chart */}
+              <svg
+                viewBox="0 0 1000 215"
+                className="w-full h-auto"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient id="declineStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stopColor="#F59E0B" />
+                    <stop offset="45%"  stopColor="#F97316" />
+                    <stop offset="100%" stopColor="#EF4444" />
+                  </linearGradient>
+                  <linearGradient id="declineFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   stopColor="#F59E0B" stopOpacity="0.12" />
+                    <stop offset="100%" stopColor="#EF4444" stopOpacity="0.01" />
+                  </linearGradient>
+                </defs>
+
+                {/* Subtle horizontal grid lines */}
+                {[88, 115, 143].map(y => (
+                  <line key={y} x1="0" y1={y} x2="1000" y2={y}
+                    stroke="#1f1f1f" strokeWidth="1" />
+                ))}
+                {/* Bottom baseline */}
+                <line x1="0" y1="175" x2="1000" y2="175"
+                  stroke="#2a2a2a" strokeWidth="1" />
+
+                {/* Area fill under curve */}
+                <path
+                  d="M 50,83 C 110,86 170,90 230,93 S 350,101 410,105 S 530,116 590,122 S 710,138 770,146 S 890,155 950,159 L 950,175 L 50,175 Z"
+                  fill="url(#declineFill)"
+                />
+
+                {/* Decline line — smooth bezier */}
+                <path
+                  d="M 50,83 C 110,86 170,90 230,93 S 350,101 410,105 S 530,116 590,122 S 710,138 770,146 S 890,155 950,159"
+                  fill="none"
+                  stroke="url(#declineStroke)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                {/* Data point dots + value labels */}
+                {[
+                  { x: 50,  y: 83,  val: '605',  fill: '#F59E0B', lblFill: '#F59E0B' },
+                  { x: 230, y: 93,  val: '580',  fill: '#F59E0B', lblFill: '#F59E0B' },
+                  { x: 410, y: 105, val: '550',  fill: '#F97316', lblFill: '#F97316' },
+                  { x: 590, y: 122, val: '510',  fill: '#F97316', lblFill: '#F97316' },
+                  { x: 770, y: 146, val: '450',  fill: '#EF4444', lblFill: '#EF4444' },
+                  { x: 950, y: 159, val: '~420', fill: '#DC2626', lblFill: '#DC2626' },
+                ].map(({ x, y, val, fill, lblFill }) => (
+                  <g key={x}>
+                    {/* Dot */}
+                    <circle cx={x} cy={y} r="3.5" fill={fill} />
+                    <circle cx={x} cy={y} r="6" fill={fill} fillOpacity="0.15" />
+                    {/* Value label */}
+                    <text
+                      x={x} y={y - 13}
+                      textAnchor="middle"
+                      fill={lblFill}
+                      fontSize="11"
+                      fontFamily="ui-monospace, monospace"
+                      fontWeight="700"
+                      opacity="0.9"
+                    >
+                      {val}
+                    </text>
+                  </g>
+                ))}
+
+                {/* Year labels */}
+                {[
+                  { x: 50,  label: '1980' },
+                  { x: 230, label: '1990' },
+                  { x: 410, label: '2000' },
+                  { x: 590, label: '2010' },
+                  { x: 770, label: '2020' },
+                  { x: 950, label: 'Today' },
+                ].map(({ x, label }) => (
+                  <text
+                    key={label}
+                    x={x} y="202"
+                    textAnchor="middle"
+                    fill="#4b4b4b"
+                    fontSize="11"
+                    fontFamily="ui-monospace, monospace"
+                    fontWeight="600"
+                    letterSpacing="1"
+                  >
+                    {label}
+                  </text>
+                ))}
+
+                {/* ng/dL unit label — top left */}
+                <text x="0" y="18" fill="#333333" fontSize="9" fontFamily="ui-monospace, monospace" fontWeight="700" letterSpacing="2">
+                  ng/dL
+                </text>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── T-Bar Teaser ───────────────────────────────────────────────── */}
+      <section className="py-32 bg-black border-b border-amber-500/10 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/4 rounded-full blur-[120px]" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">The Product</span>
+            <div className="h-px flex-1 bg-gray-900" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+            {/* Packaging visual */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
+              <img
+                src="/IMG_3795.jpeg"
+                alt="T-Bar in packaging"
+                className="w-full h-96 object-cover object-center brightness-75"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7 flex items-end justify-between">
+                <div>
+                  <img src="/logo.png" alt="Plan T" className="h-7 w-auto mb-2 opacity-90" />
+                  <p className="text-amber-500/60 text-[10px] font-bold tracking-[0.25em] uppercase">Whole Food Nutrition Bar</p>
+                </div>
+                <span className="text-amber-400 font-black text-2xl tracking-[0.2em] uppercase">T-Bar</span>
+              </div>
+              {/* Top colour strip as a subtle gradient rather than a box border */}
+              <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+            </div>
+
+            {/* Text */}
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <div className="h-px w-8 bg-amber-500/40" />
+                <span className="text-amber-500/70 text-[10px] font-bold tracking-[0.3em] uppercase">Introducing</span>
+              </div>
+
+              <h2 className="text-6xl md:text-7xl font-black text-white mb-4 leading-none tracking-tight">
+                T-Bar
+              </h2>
+              <div className="h-px w-16 bg-gradient-to-r from-amber-500/50 to-transparent mb-8" />
+
+              <p className="text-gray-300 text-base leading-relaxed mb-10">
+                Six whole-food ingredients. Zero artificial additives. No fillers, no shortcuts —
+                just real food, made with intention and handcrafted in small batches.
+              </p>
+
+              <div className="flex items-center gap-10 mb-10">
+                {[['100%', 'Natural'], ['6', 'Ingredients'], ['0', 'Fillers']].map(([val, label], i) => (
+                  <React.Fragment key={label}>
+                    {i > 0 && <div className="w-px h-10 bg-gray-800 flex-shrink-0" />}
+                    <div>
+                      <p className="text-amber-400 font-black text-3xl leading-none mb-1">{val}</p>
+                      <p className="text-gray-600 text-[9px] font-bold tracking-widest uppercase mt-1">{label}</p>
+                    </div>
+                  </React.Fragment>
+                ))}
+              </div>
+
+              <button
+                onClick={() => navigate('/ingredients')}
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold tracking-wide hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300"
+              >
+                See the Full Bar
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Mission Section - Lighter Background Transition */}
-      <section className="py-32 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500 rounded-full blur-3xl"></div>
-        </div>
+      {/* ── Latest Insights ────────────────────────────────────────────── */}
+      <section className="py-32 bg-black border-b border-gray-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center space-x-2 px-6 py-3 bg-amber-500/20 border border-amber-400/40 rounded-full mb-8 backdrop-blur-sm">
-            <Heart className="w-5 h-5 text-amber-400" />
-            <span className="text-amber-400 text-sm font-semibold tracking-wide">OUR MISSION</span>
-          </div>
-
-          <h2 className="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
-            Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-500">Plan T</span>
-          </h2>
-
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-            We're on a mission to raise awareness about the testosterone crisis affecting men worldwide and provide 
-            science-backed information to help you take control of your health.
-          </p>
-
-          <p className="text-lg text-gray-300 leading-relaxed mb-10">
-            Plan T isn't just about numbers — it's about reclaiming vitality, confidence, and quality of life. 
-            Through education, community, and actionable insights, we're building a movement of informed men 
-            who refuse to accept decline as inevitable.
-          </p>
-
-          <button 
-            onClick={() => navigate('/about')}
-            className="inline-flex items-center space-x-2 px-10 py-5 bg-gradient-to-r from-amber-500 to-amber-600 text-black text-lg font-bold rounded-lg hover:shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105"
-          >
-            <span>Learn More About Our Mission</span>
-            <ArrowRight className="w-6 h-6" />
-          </button>
-        </div>
-      </section>
-
-      {/* Featured Blog Posts / Newsletter Section */}
-      <section className="py-24 bg-gradient-to-b from-gray-700 to-gray-900 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Latest <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Insights</span>
-            </h2>
-            <p className="text-xl text-gray-300">
-              Research-backed articles and updates from the Plan T community
-            </p>
+          <div className="flex items-center gap-4 mb-14">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Latest Insights</span>
+            <div className="h-px flex-1 bg-gray-900" />
           </div>
 
           {loadingCampaigns ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-amber-500"></div>
-              <p className="text-gray-400 mt-4">Loading latest articles...</p>
+            <div className="text-center py-16">
+              <div className="inline-block w-5 h-5 border border-amber-500/40 border-t-amber-500 animate-spin" />
+              <p className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase mt-4">Loading</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {displayCampaigns.map((campaign, index) => {
                 const Icon = getCategoryIcon(campaign.category);
                 return (
-                  <div 
+                  <div
                     key={index}
-                    className="group bg-gradient-to-br from-gray-800/90 to-black/90 backdrop-blur-sm border border-amber-500/20 rounded-2xl overflow-hidden hover:border-amber-500/50 transition-all duration-300 hover:scale-105"
+                    className="bg-zinc-900/50 rounded-2xl overflow-hidden group hover:bg-zinc-900 transition-colors duration-300 flex flex-col"
                   >
-                    <div className="h-48 bg-gradient-to-br from-amber-500/20 to-amber-600/20 flex items-center justify-center">
-                      <Icon className="w-16 h-16 text-amber-400" />
-                    </div>
-                    <div className="p-6">
-                      <span className="text-amber-400 text-xs font-semibold uppercase tracking-wider">
+                    <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+                    <div className="p-8 flex flex-col h-full">
+                      <Icon className="w-5 h-5 text-amber-500/40 mb-6" />
+                      <p className="text-amber-500/50 text-[9px] font-bold tracking-[0.25em] uppercase mb-4">
                         {campaign.category || 'Newsletter'}
-                      </span>
-                      <h3 className="text-xl font-bold text-white mt-3 mb-3">
+                      </p>
+                      <h3 className="text-white font-black text-lg leading-snug tracking-tight mb-4">
                         {campaign.title}
                       </h3>
-                      <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+                      <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
                         {campaign.description}
                       </p>
                       {campaign.published_date && (
-                        <p className="text-gray-500 text-xs mb-4">{campaign.published_date}</p>
+                        <p className="text-gray-700 text-[9px] font-mono tracking-widest uppercase mb-4">
+                          {campaign.published_date}
+                        </p>
                       )}
-                      <a 
+                      <div className="h-px bg-gray-800/60 mb-4" />
+                      <a
                         href={campaign.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-amber-400 hover:text-amber-300 font-semibold text-sm flex items-center space-x-2 transition-colors duration-300"
+                        className="inline-flex items-center gap-2 text-amber-500/50 hover:text-amber-400 text-[10px] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
                       >
-                        <span>Read More</span>
-                        <ArrowRight className="w-4 h-4" />
+                        Read More
+                        <ArrowRight className="w-3 h-3" />
                       </a>
                     </div>
                   </div>
@@ -389,104 +468,36 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* T-Bar RED Product Teaser */}
-      <section className="py-24 bg-black border-y border-amber-500/10 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ── Newsletter ─────────────────────────────────────────────────── */}
+      <section id="subscribe" className="py-32 bg-black">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-            {/* Packaging visual */}
-            <div className="relative">
-              {/* Wrapper-style frame */}
-              <div className="relative bg-zinc-950 border border-amber-500/40 overflow-hidden shadow-2xl shadow-amber-900/10">
-                <div className="h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-                <img
-                  src="/IMG_3795.jpeg"
-                  alt="T-Bar RED"
-                  className="w-full h-72 object-cover object-center brightness-75"
-                />
-                {/* Overlay with product label */}
-                <div className="absolute inset-0 top-[3px] bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent flex items-end p-6">
-                  <div className="flex items-end justify-between w-full">
-                    <div>
-                      <img src="/logo.png" alt="Plan T" className="h-7 w-auto mb-2 opacity-90" />
-                      <p className="text-amber-500/60 text-[10px] font-bold tracking-[0.25em] uppercase">Whole Food Nutrition Bar</p>
-                    </div>
-                    <span className="text-amber-400 font-black text-2xl tracking-[0.2em] leading-none uppercase">T-Bar</span>
-                  </div>
-                </div>
-                <div className="h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-              </div>
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Stay Informed</span>
+            <div className="h-px w-8 bg-amber-500/40" />
+          </div>
 
-              {/* Small wrapper tiles below */}
-              <div className="grid grid-cols-4 gap-2 mt-2">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="bg-zinc-950 border border-amber-500/20 overflow-hidden">
-                    <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-                    <div className="px-2 py-2 flex items-center justify-between">
-                      <span className="text-amber-500/50 text-[8px] font-bold tracking-widest uppercase">Plan T</span>
-                      <span className="text-amber-400/70 font-black text-[8px] tracking-widest uppercase">T-Bar</span>
-                    </div>
-                    <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-                  </div>
-                ))}
-              </div>
-            </div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight leading-none">
+            Join The<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">
+              Revolution
+            </span>
+          </h2>
+          <p className="text-gray-500 text-base mb-14 max-w-sm mx-auto leading-relaxed">
+            Research-backed insights, early access, and a community of men taking their health seriously.
+          </p>
 
-            {/* Text content */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-px w-8 bg-amber-500/50" />
-                <span className="text-amber-500 text-xs font-bold tracking-[0.25em] uppercase">Introducing</span>
-              </div>
-              <h2 className="text-5xl md:text-6xl font-black text-white mb-8 leading-none tracking-tight">
-                T-Bar
-              </h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                Six whole-food ingredients. Zero artificial additives. No fillers, no shortcuts — just real food,
-                made with intention and handcrafted in small batches.
-              </p>
-              <div className="grid grid-cols-3 gap-3 mb-8">
-                {[['100%', 'Natural'], ['6', 'Ingredients'], ['0', 'Fillers']].map(([val, label]) => (
-                  <div key={label} className="border border-amber-500/20 p-3 text-center bg-zinc-950/50">
-                    <p className="text-amber-400 font-black text-2xl leading-none">{val}</p>
-                    <p className="text-gray-500 text-xs tracking-widest uppercase mt-1">{label}</p>
-                  </div>
-                ))}
-              </div>
-              <button
-                onClick={() => navigate('/ingredients')}
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-black font-bold hover:shadow-xl hover:shadow-amber-500/30 transition-all duration-300 hover:scale-105"
-              >
-                <span>See the Full Bar</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+          <div className="bg-zinc-900/50 rounded-2xl overflow-hidden">
+            <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+            <div className="p-8 md:p-12">
+              <MailchimpSignup />
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section id="subscribe" className="py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-amber-500/30 rounded-3xl p-12 md:p-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Join The <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Revolution</span>
-            </h2>
-            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-              Get exclusive tips on boosting testosterone naturally, early access to new products, and join a community of men reclaiming their vitality.
-            </p>
-
-            <MailchimpSignup className="max-w-xl mx-auto" />
-          </div>
-        </div>
-      </section>
     </div>
   );
 };

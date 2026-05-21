@@ -1,13 +1,15 @@
 import React from 'react';
-import { Clock, Leaf, Award, Heart, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Clock, Leaf, Award, Heart, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ingredientsData } from '../mock';
 import { MailchimpSignup } from '../components/MailchimpSignup';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '../components/ui/carousel';
+import { barsData } from '../data/barsData';
 
 /* Replicates the T-Bar wrapper aesthetic */
 function BarMenuCard() {
   return (
-    <div className="relative bg-zinc-950 border border-amber-500/40 overflow-hidden shadow-2xl shadow-black">
+    <div className="relative bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
       {/* Top amber strip */}
       <div className="h-[3px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
 
@@ -53,12 +55,15 @@ function BarMenuCard() {
             </div>
 
             {/* Claims */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
-              {[['100%', 'Natural'], ['0', 'Artificial\nAdditives'], ['6', 'Key\nCompounds']].map(([val, label]) => (
-                <div key={val + label} className="border border-amber-500/20 p-2.5 text-center">
-                  <p className="text-amber-400 font-black text-lg leading-none">{val}</p>
-                  <p className="text-gray-500 text-[9px] tracking-widest uppercase mt-1 whitespace-pre-line leading-tight">{label}</p>
-                </div>
+            <div className="flex items-center gap-8 mb-6">
+              {[['100%', 'Natural'], ['0', 'Artificial Additives'], ['6', 'Key Compounds']].map(([val, label], i) => (
+                <React.Fragment key={val + label}>
+                  {i > 0 && <div className="w-px h-8 bg-gray-800 flex-shrink-0" />}
+                  <div>
+                    <p className="text-amber-400 font-black text-lg leading-none">{val}</p>
+                    <p className="text-gray-500 text-[9px] tracking-widest uppercase mt-1 leading-tight">{label}</p>
+                  </div>
+                </React.Fragment>
               ))}
             </div>
           </div>
@@ -79,68 +84,15 @@ function BarMenuCard() {
   );
 }
 
-const barVariants = [
-  {
-    name: 'Plan T',
-    variant: 'RED',
-    tagline: 'Beetroot · Dark Cacao · Ginger',
-    description: 'Rich and earthy with a deep chocolate finish. Built around whole beetroot, dark cacao, and warming ginger root.',
-    key: ['Beetroot', 'Dark Cacao', 'Ginger Root', 'Almonds'],
-    strip: 'from-amber-800 via-amber-400 to-amber-800',
-    border: 'border-amber-500/40',
-    accentText: 'text-amber-400',
-    status: 'Coming Soon',
-  },
-  {
-    name: 'Plan T',
-    variant: 'GREEN',
-    tagline: 'Matcha · Pumpkin Seeds · Dates',
-    description: 'Clean and grassy with a naturally sweet finish. Anchored by ceremonial matcha, whole pumpkin seeds, and Medjool dates.',
-    key: ['Matcha', 'Pumpkin Seeds', 'Dates', 'Cashews'],
-    strip: 'from-emerald-900 via-emerald-500 to-emerald-900',
-    border: 'border-emerald-500/40',
-    accentText: 'text-emerald-400',
-    status: 'In Development',
-  },
-  {
-    name: 'Plan T',
-    variant: 'DARK',
-    tagline: 'Espresso · Dark Cacao · Almonds',
-    description: 'Intense and bold. Double-dark with espresso and 85% cacao, softened by whole almonds and a touch of sea salt.',
-    key: ['Dark Cacao', 'Espresso', 'Almonds', 'Sea Salt'],
-    strip: 'from-stone-700 via-stone-300 to-stone-700',
-    border: 'border-stone-500/40',
-    accentText: 'text-stone-300',
-    status: 'In Development',
-  },
-  {
-    name: 'Plan T',
-    variant: 'GOLD',
-    tagline: 'Dates · Honey · Walnuts',
-    description: 'Warm and lightly sweet. Medjool dates and raw honey give it a caramel depth, balanced by whole walnuts and vanilla.',
-    key: ['Medjool Dates', 'Raw Honey', 'Walnuts', 'Vanilla'],
-    strip: 'from-yellow-700 via-yellow-300 to-yellow-700',
-    border: 'border-yellow-500/40',
-    accentText: 'text-yellow-400',
-    status: 'In Development',
-  },
-  {
-    name: 'Plan T',
-    variant: 'ORIGINAL',
-    tagline: 'Oats · Almonds · Dark Honey',
-    description: 'The everyday bar. Whole oats, blanched almonds, and dark honey — straightforward, satisfying, and made to last.',
-    key: ['Whole Oats', 'Almonds', 'Dark Honey', 'Coconut'],
-    strip: 'from-orange-800 via-orange-400 to-orange-800',
-    border: 'border-orange-500/40',
-    accentText: 'text-orange-400',
-    status: 'In Development',
-  },
-];
+const barVariants = Object.values(barsData);
 
 function VariantCard({ bar }) {
   return (
-    <div className={`group relative bg-zinc-950 border ${bar.border} hover:brightness-110 transition-all duration-500 overflow-hidden h-full`}>
-      <div className={`h-[3px] bg-gradient-to-r ${bar.strip}`} />
+    <Link
+      to={`/bars/${bar.id}`}
+      className={`group relative bg-zinc-900/70 rounded-xl border ${bar.color.border} hover:brightness-110 hover:bg-zinc-900 transition-all duration-500 overflow-hidden h-full flex flex-col`}
+    >
+      <div className={`h-[3px] bg-gradient-to-r ${bar.color.strip}`} />
       <div className="p-6 flex flex-col h-full">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
@@ -148,10 +100,10 @@ function VariantCard({ bar }) {
             <img src="/logo.png" alt="Plan T" className="h-6 w-auto opacity-80 mb-1" />
             <p className="text-gray-600 text-[9px] font-bold tracking-[0.25em] uppercase">{bar.name}</p>
           </div>
-          <span className={`${bar.accentText} font-black text-xl tracking-[0.15em] leading-none`}>{bar.variant}</span>
+          <span className={`${bar.color.text} font-black text-xl tracking-[0.15em] leading-none`}>{bar.variant}</span>
         </div>
 
-        <div className={`h-px bg-gradient-to-r ${bar.strip} opacity-30 mb-4`} />
+        <div className={`h-px bg-gradient-to-r ${bar.color.strip} opacity-30 mb-4`} />
 
         {/* Tagline */}
         <p className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-3">{bar.tagline}</p>
@@ -161,19 +113,19 @@ function VariantCard({ bar }) {
 
         {/* Key ingredients */}
         <div className="flex flex-wrap gap-1.5 mb-5">
-          {bar.key.map((k) => (
-            <span key={k} className="text-gray-600 text-[9px] font-mono tracking-widest uppercase border border-gray-800 px-2 py-1">
-              {k}
+          {bar.ingredients.slice(0, 4).map((ing) => (
+            <span key={ing.name} className="text-gray-600 text-[9px] font-mono tracking-widest uppercase border border-gray-800 px-2 py-1">
+              {ing.name}
             </span>
           ))}
         </div>
 
         {/* Status */}
-        <div className={`h-px bg-gradient-to-r ${bar.strip} opacity-20 mb-3`} />
-        <p className={`${bar.accentText} text-[9px] font-bold tracking-[0.25em] uppercase opacity-70`}>{bar.status}</p>
+        <div className={`h-px bg-gradient-to-r ${bar.color.strip} opacity-20 mb-3`} />
+        <p className={`${bar.color.text} text-[9px] font-bold tracking-[0.25em] uppercase opacity-70`}>{bar.status}</p>
       </div>
-      <div className={`h-[3px] bg-gradient-to-r ${bar.strip} opacity-40`} />
-    </div>
+      <div className={`h-[3px] bg-gradient-to-r ${bar.color.strip} opacity-40`} />
+    </Link>
   );
 }
 
@@ -231,7 +183,7 @@ export const Ingredients = () => {
             <Carousel opts={{ align: 'start', loop: true }} className="w-full">
               <CarouselContent className="-ml-4">
                 {barVariants.map((bar) => (
-                  <CarouselItem key={bar.variant} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={bar.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                     <VariantCard bar={bar} />
                   </CarouselItem>
                 ))}
@@ -375,7 +327,7 @@ export const Ingredients = () => {
             {ingredientsData.map((ingredient) => (
               <div
                 key={ingredient.id}
-                className="group relative bg-black border border-gray-800 hover:border-amber-500/50 transition-all duration-500 overflow-hidden"
+                className="group relative bg-zinc-900/50 rounded-2xl hover:bg-zinc-900 transition-all duration-500 overflow-hidden"
               >
                 <div className="absolute top-4 left-4 z-20 text-gray-600 font-mono text-sm">
                   {ingredient.number}
@@ -411,7 +363,7 @@ export const Ingredients = () => {
                     {ingredient.nutrients.map((nutrient, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1.5 bg-gray-900 border border-gray-800 text-gray-500 text-xs font-mono uppercase tracking-wider"
+                        className="px-3 py-1.5 bg-zinc-800/60 rounded-full text-gray-500 text-xs font-mono uppercase tracking-wider"
                       >
                         {nutrient}
                       </span>
@@ -419,7 +371,6 @@ export const Ingredients = () => {
                   </div>
                 </div>
 
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-amber-500/20 transition-all duration-500 pointer-events-none"></div>
               </div>
             ))}
           </div>
@@ -438,7 +389,7 @@ export const Ingredients = () => {
             </p>
           </div>
 
-          <div className="bg-zinc-950 border border-amber-500/20 overflow-hidden">
+          <div className="bg-zinc-900/50 rounded-2xl overflow-hidden">
             <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
             <div className="p-8 md:p-12 space-y-8">
               {[
@@ -457,7 +408,6 @@ export const Ingredients = () => {
                 </div>
               ))}
             </div>
-            <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/20 to-transparent" />
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook } from 'lucide-react';
 import { SiTiktok } from 'react-icons/si';
+import { barsData } from '../data/barsData';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,7 +10,7 @@ export const Footer = () => {
   return (
     <footer className="bg-black border-t border-amber-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
@@ -60,6 +61,23 @@ export const Footer = () => {
                   The Bar <span className="text-amber-400 font-bold text-[9px] tracking-[0.2em] border border-amber-500/30 px-1.5 py-0.5 uppercase">New</span>
                 </Link>
               </li>
+            </ul>
+          </div>
+
+          {/* The Bars */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">The Bars</h3>
+            <ul className="space-y-2">
+              {Object.values(barsData).map((bar) => (
+                <li key={bar.id}>
+                  <Link
+                    to={`/bars/${bar.id}`}
+                    className={`${bar.color.text} opacity-60 hover:opacity-100 transition-opacity duration-300 text-sm font-bold tracking-[0.1em] uppercase`}
+                  >
+                    {bar.variant}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

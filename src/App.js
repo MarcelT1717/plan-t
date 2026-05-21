@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { Ingredients } from "./pages/Ingredients";
 import { About } from "./pages/About";
+import { BarPage } from "./pages/BarPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/ingredients" element={<Ingredients />} />
           <Route path="/about" element={<About />} />
+          <Route path="/bars/:barId" element={<BarPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

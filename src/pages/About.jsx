@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { TrendingDown, Activity, BookOpen, Leaf, Heart, Zap, Lightbulb, Shield } from 'lucide-react';
+import { TrendingDown, Activity, BookOpen, Leaf, Zap, Shield, ArrowRight } from 'lucide-react';
 import { MailchimpSignup } from '../components/MailchimpSignup';
 
 const heroStyles = `
@@ -55,13 +55,12 @@ function DNACanvas() {
         const baseAlpha = h % 2 === 0 ? 0.38 : 0.18;
         const rungStep  = 26;
 
-        // Rungs + nucleotide dots
         for (let y = -rungStep; y < canvas.height + rungStep; y += rungStep) {
           const s1    = Math.sin(y * freq + phase);
           const s2    = Math.sin(y * freq + phase + Math.PI);
           const x1    = cx + s1 * amplitude;
           const x2    = cx + s2 * amplitude;
-          const depth = (Math.abs(s1) + 0.3) / 1.3; // 0.23–1
+          const depth = (Math.abs(s1) + 0.3) / 1.3;
 
           ctx.beginPath();
           ctx.moveTo(x1, y);
@@ -70,20 +69,17 @@ function DNACanvas() {
           ctx.lineWidth   = 1.2 * depth;
           ctx.stroke();
 
-          // dot strand 1
           ctx.beginPath();
           ctx.arc(x1, y, 2.2 * depth + 0.8, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(245,158,11,${baseAlpha * depth * 1.1})`;
           ctx.fill();
 
-          // dot strand 2
           ctx.beginPath();
           ctx.arc(x2, y, 2.2 * depth + 0.8, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(251,191,36,${baseAlpha * depth * 0.85})`;
           ctx.fill();
         }
 
-        // Strand 1
         ctx.beginPath();
         for (let y = 0; y <= canvas.height; y += 3) {
           const x = cx + Math.sin(y * freq + phase) * amplitude;
@@ -93,7 +89,6 @@ function DNACanvas() {
         ctx.lineWidth   = 1.6;
         ctx.stroke();
 
-        // Strand 2
         ctx.beginPath();
         for (let y = 0; y <= canvas.height; y += 3) {
           const x = cx + Math.sin(y * freq + phase + Math.PI) * amplitude;
@@ -130,27 +125,24 @@ export const About = () => {
     <div className="min-h-screen bg-black pt-20">
       <style>{heroStyles}</style>
 
-      {/* Hero Section */}
-      <section className="relative min-h-[88vh] flex flex-col justify-center overflow-hidden bg-black">
-
-        {/* DNA helix background */}
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-black">
         <DNACanvas />
 
-        {/* Central amber glow */}
+        {/* Central glow */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] bg-amber-500/8 rounded-full blur-[130px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] bg-amber-500/6 rounded-full blur-[140px]" />
         </div>
 
         {/* Bottom fade */}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black to-transparent pointer-events-none" style={{ zIndex: 10 }} />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black to-transparent pointer-events-none" style={{ zIndex: 10 }} />
 
-        {/* Content */}
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-32" style={{ zIndex: 20 }}>
 
           {/* Badge */}
-          <div className="hero-badge inline-flex items-center space-x-3 px-5 py-2.5 bg-amber-500/10 border border-amber-500/30 rounded-full mb-10 backdrop-blur-sm">
-            <span className="pulse-dot w-2 h-2 bg-amber-400 rounded-full inline-block" />
-            <span className="text-amber-400 text-xs font-bold tracking-[0.2em] uppercase">Our Story</span>
+          <div className="hero-badge inline-flex items-center gap-3 px-5 py-2.5 bg-amber-500/10 border border-amber-500/30 mb-10">
+            <span className="pulse-dot w-2 h-2 bg-amber-400 rounded-full" />
+            <span className="text-amber-400 text-[10px] font-bold tracking-[0.25em] uppercase">Our Story</span>
           </div>
 
           {/* Title */}
@@ -161,7 +153,7 @@ export const About = () => {
             </span>
           </h1>
 
-          {/* Amber divider line */}
+          {/* Divider */}
           <div className="flex justify-center mb-8">
             <div className="hero-line h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent" style={{ width: 80 }} />
           </div>
@@ -171,60 +163,73 @@ export const About = () => {
             A movement dedicated to raising awareness about the testosterone crisis and empowering men with the knowledge to reclaim their vitality.
           </p>
 
-          {/* Stats strip — only verified research figures */}
-          <div className="hero-stats flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-12">
+          {/* Stats strip */}
+          <div className="hero-stats flex items-center justify-center gap-0">
             {[
-              { value: '25%',    label: 'Avg. T-level decline since 1980' },
-              { value: '1%',     label: 'Annual decline rate per year' },
-              { value: '100%',   label: 'Natural whole-food ingredients' },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <p className="text-3xl font-black text-amber-400 tracking-tight">{s.value}</p>
-                <p className="text-gray-500 text-xs uppercase tracking-widest mt-1">{s.label}</p>
-              </div>
+              { value: '25%',  label: 'Decline since 1980' },
+              { value: '1%',   label: 'Annual rate' },
+              { value: '100%', label: 'Natural ingredients' },
+            ].map((s, i) => (
+              <React.Fragment key={s.label}>
+                {i > 0 && <div className="w-px h-10 bg-gray-800 mx-10 flex-shrink-0" />}
+                <div className="text-center">
+                  <p className="text-2xl font-black text-amber-400 tracking-tight">{s.value}</p>
+                  <p className="text-gray-600 text-[9px] font-bold uppercase tracking-widest mt-1">{s.label}</p>
+                </div>
+              </React.Fragment>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Mission Statement */}
-      <section className="py-24 bg-black border-y border-gray-800">
+      {/* ── Mission ───────────────────────────────────────────────────── */}
+      <section className="py-24 bg-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Mission</span>
+            <div className="h-px flex-1 bg-gray-900" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+            {/* Text */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Mission</span>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-8 leading-tight tracking-tight">
+                Why We<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Exist</span>
               </h2>
-              <p className="text-xl text-gray-300 leading-relaxed mb-6">
+              <p className="text-gray-300 text-base leading-relaxed mb-6">
                 Plan T exists to shine a light on one of the most significant yet overlooked health trends of our time:
                 the dramatic decline in men's testosterone levels.
               </p>
-              <p className="text-lg text-gray-400 leading-relaxed mb-6">
+              <p className="text-gray-400 text-sm leading-relaxed mb-6">
                 We believe that every man deserves to understand what's happening to his body, why it matters,
                 and what evidence-based steps he can take to optimize his health naturally.
               </p>
-              <p className="text-lg text-gray-400 leading-relaxed">
+              <p className="text-gray-500 text-sm leading-relaxed">
                 Through education, community, and advocacy, we're building a movement of informed men who refuse
                 to accept hormonal decline as an inevitable part of aging.
               </p>
             </div>
 
+            {/* Pillars */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { icon: Leaf,     value: '6',      label: 'Key Ingredients',   offset: '' },
-                { icon: BookOpen, value: 'Peer',   label: 'Reviewed Research', offset: 'mt-6' },
-                { icon: Zap,      value: '100%',   label: 'Natural Formula',   offset: '-mt-6' },
-                { icon: Shield,   value: 'Zero',   label: 'Compromise',        offset: '' },
-              ].map(({ icon: Icon, value, label, offset }) => (
-                <div key={label} className={`bg-zinc-950 border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 overflow-hidden ${offset}`}>
+                { icon: Leaf,     value: '6',     label: 'Key Ingredients' },
+                { icon: BookOpen, value: 'Peer',  label: 'Reviewed Research' },
+                { icon: Zap,      value: '100%',  label: 'Natural Formula' },
+                { icon: Shield,   value: 'Zero',  label: 'Compromise' },
+              ].map(({ icon: Icon, value, label }) => (
+                <div key={label} className="bg-zinc-900/50 rounded-2xl overflow-hidden group hover:bg-zinc-900 transition-colors duration-300">
                   <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
-                  <div className="p-6 text-center">
-                    <Icon className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-                    <div className="h-px bg-amber-500/15 mx-4 mb-3" />
-                    <h3 className="text-white font-black text-xl tracking-tight mb-1">{value}</h3>
-                    <p className="text-gray-500 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
+                  <div className="p-7 text-center">
+                    <Icon className="w-6 h-6 text-amber-400/70 mx-auto mb-4" />
+                    <div className="h-px bg-amber-500/10 mx-4 mb-4" />
+                    <p className="text-white font-black text-xl tracking-tight mb-1">{value}</p>
+                    <p className="text-gray-600 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
                   </div>
-                  <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/15 to-transparent" />
                 </div>
               ))}
             </div>
@@ -232,224 +237,211 @@ export const About = () => {
         </div>
       </section>
 
-      {/* The Testosterone Decline Trend */}
-      <section className="py-32 bg-gradient-to-b from-black to-gray-900">
+      {/* ── The Research ──────────────────────────────────────────────── */}
+      <section className="py-24 bg-black">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Understanding the <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-400">Decline</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              The data is clear: men's testosterone levels have been falling steadily for decades.
-            </p>
+
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">The Research</span>
+            <div className="h-px flex-1 bg-gray-900" />
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-3xl p-8 md:p-12 mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6">Key Findings from Research:</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start mb-14">
+            <div className="lg:col-span-3">
+              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-6">
+                Understanding<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-400">The Decline</span>
+              </h2>
+              <p className="text-gray-400 text-base leading-relaxed">
+                The data is clear and consistent across multiple studies spanning four decades.
+                Men's testosterone levels have been falling steadily, even when controlling for age,
+                BMI, and other health factors.
+              </p>
+            </div>
 
-            <div className="space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-2 h-2 bg-amber-400 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="text-white font-semibold mb-2">25% Average Decline Since 1980</h4>
-                  <p className="text-gray-400 leading-relaxed">
-                    Multiple studies show that average testosterone levels in men have dropped approximately 1% per year
-                    over the past four decades, even when controlling for age, BMI, and other health factors.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-2 h-2 bg-amber-400 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="text-white font-semibold mb-2">Affects All Age Groups</h4>
-                  <p className="text-gray-400 leading-relaxed">
-                    This isn't just about older men. Young men in their 20s and 30s today have significantly lower
-                    testosterone levels than men of the same age just one generation ago.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-2 h-2 bg-amber-400 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="text-white font-semibold mb-2">Multiple Contributing Factors</h4>
-                  <p className="text-gray-400 leading-relaxed">
-                    Environmental toxins, sedentary lifestyles, poor sleep habits, stress, ultra-processed foods,
-                    and endocrine-disrupting chemicals all play a role in this concerning trend.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0 w-2 h-2 bg-amber-400 rounded-full mt-2"></div>
-                <div>
-                  <h4 className="text-white font-semibold mb-2">Wide-Ranging Health Impacts</h4>
-                  <p className="text-gray-400 leading-relaxed">
-                    Low testosterone is linked to decreased energy, reduced muscle mass, increased body fat,
-                    mood disturbances, cognitive decline, cardiovascular issues, and diminished quality of life.
-                  </p>
-                </div>
-              </div>
+            {/* Mini stat items */}
+            <div className="lg:col-span-2 flex flex-col gap-6 justify-center">
+              {[
+                { icon: TrendingDown, value: '1%',       label: 'Annual Decline Rate' },
+                { icon: Activity,     value: '300–1000',  label: 'Normal Range (ng/dL)' },
+                { icon: Leaf,         value: '6',         label: 'Key Ingredients' },
+              ].map(({ icon: Icon, value, label }, i) => (
+                <React.Fragment key={label}>
+                  {i > 0 && <div className="h-px bg-gray-900" />}
+                  <div className="flex items-center gap-5">
+                    <Icon className="w-5 h-5 text-amber-400/50 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-black text-lg tracking-tight leading-none mb-1">{value}</p>
+                      <p className="text-gray-600 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
+                    </div>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          {/* 4 finding cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[
-              { icon: TrendingDown, value: '1%',      label: 'Annual Decline Rate' },
-              { icon: Activity,     value: '300–1000', label: 'Normal Range (ng/dL)' },
-              { icon: Leaf,         value: '6',        label: 'T-Supporting Ingredients' },
-            ].map(({ icon: Icon, value, label }) => (
-              <div key={label} className="bg-zinc-950 border border-amber-500/20 overflow-hidden text-center">
+              {
+                num: '01',
+                title: '25% Average Decline Since 1980',
+                body: 'Multiple studies show average testosterone levels have dropped approximately 1% per year over four decades, even when controlling for age, BMI, and other health factors.'
+              },
+              {
+                num: '02',
+                title: 'Affects All Age Groups',
+                body: 'This isn\'t just about older men. Young men in their 20s and 30s today have significantly lower testosterone than men of the same age one generation ago.'
+              },
+              {
+                num: '03',
+                title: 'Multiple Contributing Factors',
+                body: 'Environmental toxins, sedentary lifestyles, poor sleep, chronic stress, ultra-processed foods, and endocrine-disrupting chemicals all play a documented role.'
+              },
+              {
+                num: '04',
+                title: 'Wide-Ranging Health Impacts',
+                body: 'Low testosterone is associated with decreased energy, reduced muscle mass, increased body fat, mood disturbances, cognitive changes, and diminished quality of life.'
+              },
+            ].map(({ num, title, body }) => (
+              <div key={num} className="bg-zinc-900/50 rounded-2xl overflow-hidden group hover:bg-zinc-900 transition-colors duration-300">
                 <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
                 <div className="p-8">
-                  <Icon className="w-10 h-10 text-amber-400 mx-auto mb-4" />
-                  <div className="h-px bg-amber-500/15 mx-6 mb-4" />
-                  <h3 className="text-3xl font-black text-white tracking-tight mb-2">{value}</h3>
-                  <p className="text-gray-500 text-[9px] font-bold tracking-[0.2em] uppercase">{label}</p>
+                  <div className="flex items-start gap-5">
+                    <span className="text-gray-800 font-mono text-xs flex-shrink-0 mt-0.5">{num}</span>
+                    <div>
+                      <h3 className="text-white font-black text-sm mb-3 tracking-tight leading-snug">{title}</h3>
+                      <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-500/15 to-transparent" />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Research-Backed Overview */}
-      <section className="py-24 bg-gradient-to-b from-gray-900 to-black border-y border-gray-800">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-12 text-center">
-            Science-Backed <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Approach</span>
-          </h2>
+      {/* ── Our Approach ──────────────────────────────────────────────── */}
+      <section className="py-24 bg-black">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="prose prose-invert max-w-none space-y-8">
-            <p className="text-xl text-gray-300 leading-relaxed">
-              At Plan T, we're committed to providing information grounded in peer-reviewed research and clinical evidence.
-              We're not medical professionals, and we don't offer medical advice. Instead, we educate and empower.
-            </p>
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Our Approach</span>
+            <div className="h-px flex-1 bg-gray-900" />
+          </div>
 
-            <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-white mb-6">Our Educational Focus:</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-              <ul className="space-y-4">
-                <li className="flex items-start space-x-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center mt-1">
-                    <span className="text-amber-400 text-sm">✓</span>
-                  </span>
-                  <span className="text-gray-300">
-                    <strong className="text-white">Lifestyle Optimization:</strong> Evidence-based strategies for sleep,
-                    exercise, stress management, and nutrition
-                  </span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center mt-1">
-                    <span className="text-amber-400 text-sm">✓</span>
-                  </span>
-                  <span className="text-gray-300">
-                    <strong className="text-white">Environmental Awareness:</strong> Understanding and minimizing exposure
-                    to endocrine disruptors
-                  </span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center mt-1">
-                    <span className="text-amber-400 text-sm">✓</span>
-                  </span>
-                  <span className="text-gray-300">
-                    <strong className="text-white">Nutritional Science:</strong> Foods and nutrients that support healthy
-                    hormone production
-                  </span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center mt-1">
-                    <span className="text-amber-400 text-sm">✓</span>
-                  </span>
-                  <span className="text-gray-300">
-                    <strong className="text-white">Testing & Tracking:</strong> When and how to get tested, understanding
-                    your results
-                  </span>
-                </li>
-                <li className="flex items-start space-x-3">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center mt-1">
-                    <span className="text-amber-400 text-sm">✓</span>
-                  </span>
-                  <span className="text-gray-300">
-                    <strong className="text-white">Community Support:</strong> Connecting with other men on the same journey
-                  </span>
-                </li>
-              </ul>
+            <div>
+              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-8">
+                Science-Backed<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Education</span>
+              </h2>
+              <p className="text-gray-300 text-base leading-relaxed mb-8">
+                At Plan T, we're committed to providing information grounded in peer-reviewed research and
+                clinical evidence. We're not medical professionals, and we don't offer medical advice —
+                we educate and empower.
+              </p>
+              <div className="border-l-2 border-amber-500/40 pl-6">
+                <p className="text-gray-400 text-sm italic leading-relaxed">
+                  "We believe that knowledge is power. By understanding what's happening and why, men can make
+                  informed decisions about their health in consultation with qualified healthcare providers."
+                </p>
+              </div>
             </div>
 
-            <p className="text-lg text-gray-400 leading-relaxed italic border-l-4 border-amber-500 pl-6">
-              "We believe that knowledge is power. By understanding what's happening and why, men can make informed
-              decisions about their health in consultation with qualified healthcare providers."
-            </p>
+            <div>
+              {[
+                { label: 'Lifestyle Optimization',   body: 'Evidence-based strategies for sleep, exercise, stress management, and nutrition.' },
+                { label: 'Environmental Awareness',  body: 'Understanding and minimizing exposure to endocrine-disrupting chemicals.' },
+                { label: 'Nutritional Science',      body: 'Foods and nutrients that support healthy hormone health and overall vitality.' },
+                { label: 'Testing & Tracking',       body: 'When and how to get tested, and how to understand your results.' },
+                { label: 'Community Support',        body: 'Connecting with other men on the same journey toward better health.' },
+              ].map(({ label, body }, i) => (
+                <div key={label} className="flex items-start gap-5 py-5 border-b border-gray-900 last:border-0">
+                  <span className="text-gray-800 font-mono text-[10px] flex-shrink-0 mt-0.5 w-5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="text-white font-bold text-sm mb-1 tracking-tight">{label}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Founder Story */}
+      {/* ── Why We Started ────────────────────────────────────────────── */}
       <section className="py-32 bg-black">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Why We <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Started</span>
-            </h2>
+
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Why We Started</span>
+            <div className="h-px flex-1 bg-gray-900" />
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-amber-500/20 rounded-3xl p-8 md:p-12">
-            <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
-              <p>
-                Plan T was born from a simple realization: something fundamental is changing in men's health,
-                yet few people are talking about it.
+          {/* Pull quote card */}
+          <div className="bg-zinc-900/50 rounded-2xl overflow-hidden mb-14">
+            <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+            <div className="p-10 md:p-14">
+              <p className="text-amber-400/20 font-black text-8xl leading-none select-none mb-2">"</p>
+              <p className="text-white font-black text-2xl md:text-3xl leading-snug tracking-tight mb-6">
+                We started Plan T to change the narrative around men's health.
               </p>
-
-              <p>
-                As we researched the data, the picture became clear. Study after study showed the same disturbing trend:
-                testosterone levels falling across all age groups, impacting energy, vitality, mental clarity, and overall quality of life.
-              </p>
-
-              <p>
-                But here's what troubled us most: despite the mountain of evidence, this issue remains largely invisible
-                in mainstream health conversations. Men suffer in silence, attributing their symptoms to stress, aging,
-                or "just how life is" — never realizing there's a biological explanation.
-              </p>
-
-              <p className="text-amber-400 font-semibold text-xl">
-                We started Plan T to change that narrative.
-              </p>
-
-              <p>
-                This isn't about selling quick fixes or miracle cures. It's about education, awareness, and empowerment.
-                It's about giving men the information they need to have informed conversations with their doctors,
-                make lifestyle changes backed by science, and take control of their health destiny.
-              </p>
-
-              <p>
-                Every man who joins Plan T becomes part of a growing movement — a community that refuses to accept
-                decline as inevitable and chooses to fight back with knowledge, action, and mutual support.
-              </p>
+              <div className="h-px bg-amber-500/15 mb-5" />
+              <p className="text-gray-600 text-xs font-bold tracking-[0.2em] uppercase">Plan T</p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Call to Action */}
-      <section className="py-24 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Join the Movement
-            </h2>
-            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-              Be part of a community dedicated to raising awareness and reclaiming male vitality through knowledge and action.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-amber-500/30 rounded-3xl p-12">
-            <MailchimpSignup className="max-w-xl mx-auto" />
+          {/* Body text */}
+          <div className="space-y-6">
+            {[
+              'Plan T was born from a simple realization: something fundamental is changing in men\'s health, yet few people are talking about it.',
+              'As we researched the data, the picture became clear. Study after study showed the same disturbing trend: testosterone levels falling across all age groups, impacting energy, vitality, mental clarity, and overall quality of life.',
+              'But here\'s what troubled us most: despite the mountain of evidence, this issue remains largely invisible in mainstream health conversations. Men suffer in silence, attributing their symptoms to stress, aging, or "just how life is" — never realizing there\'s a biological explanation.',
+              'This isn\'t about selling quick fixes or miracle cures. It\'s about education, awareness, and empowerment. It\'s about giving men the information they need to have informed conversations with their doctors, make lifestyle changes backed by science, and take control of their health destiny.',
+            ].map((para, i) => (
+              <p key={i} className="text-gray-400 text-base leading-relaxed">
+                {para}
+              </p>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* ── Join the Movement ─────────────────────────────────────────── */}
+      <section className="py-32 bg-black">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <div className="h-px w-8 bg-amber-500/40" />
+            <span className="text-gray-700 text-[10px] font-bold tracking-[0.3em] uppercase">Join Us</span>
+            <div className="h-px w-8 bg-amber-500/40" />
+          </div>
+
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight leading-none">
+            Join the<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">Movement</span>
+          </h2>
+          <p className="text-gray-500 text-base mb-14 max-w-sm mx-auto leading-relaxed">
+            Be part of a community dedicated to raising awareness and reclaiming male vitality through knowledge and action.
+          </p>
+
+          <div className="bg-zinc-900/50 rounded-2xl overflow-hidden">
+            <div className="h-[2px] bg-gradient-to-r from-amber-700 via-amber-400 to-amber-700" />
+            <div className="p-8 md:p-12">
+              <MailchimpSignup />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 };
