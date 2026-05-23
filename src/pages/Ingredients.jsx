@@ -17,8 +17,8 @@ function BarMenuCard() {
         {/* Bar photo panel */}
         <div className="relative md:w-1/2 min-h-[320px] overflow-hidden">
           <img
-            src="/IMG_3795.jpeg"
-            alt="T-Bar RED packaging"
+            src="/Plan T Bars Collection.jpeg"
+            alt="Plan T bars"
             className="w-full h-full object-cover brightness-90"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-zinc-950/80" />
@@ -210,8 +210,8 @@ export const Ingredients = () => {
           {/* Raw Ingredients */}
           <div className="relative overflow-hidden group">
             <img
-              src="/IMG_3781.jpeg"
-              alt="Raw T-Bar ingredients laid out — beets, almonds, dates, pumpkin seeds, and beetroot powder"
+              src="/Plan T Bars multiple.jpeg"
+              alt="Plan T bars"
               className="w-full h-full object-cover object-center brightness-75 group-hover:brightness-90 group-hover:scale-105 transition-all duration-700"
               style={{ minHeight: '480px' }}
             />
@@ -222,7 +222,7 @@ export const Ingredients = () => {
                 Pure. Natural.<br />Purposeful.
               </h3>
               <p className="text-gray-300 text-sm max-w-xs leading-relaxed">
-                Every ingredient sourced for a reason — from whole beets to raw almonds, dates, pumpkin seeds, and concentrated beetroot powder.
+                Every ingredient sourced for a reason — from whole beets to raw almonds, dates, and pumpkin seeds.
               </p>
             </div>
             <div className="absolute top-6 right-6 px-3 py-1.5 bg-black/60 border border-amber-500/30 backdrop-blur-sm">
@@ -233,8 +233,8 @@ export const Ingredients = () => {
           {/* Finished Bars */}
           <div className="relative overflow-hidden group">
             <img
-              src="/IMG_3795.jpeg"
-              alt="Plan T Red bars in packaging, ready to ship"
+              src="/Plan T Bars Collection.jpeg"
+              alt="Plan T bars collection"
               className="w-full h-full object-cover object-center brightness-75 group-hover:brightness-90 group-hover:scale-105 transition-all duration-700"
               style={{ minHeight: '480px' }}
             />

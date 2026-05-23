@@ -351,9 +351,9 @@ export const Home = () => {
             {/* Packaging visual */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/60">
               <img
-                src="/IMG_3795.jpeg"
-                alt="T-Bar in packaging"
-                className="w-full h-96 object-cover object-center brightness-75"
+                src="/Plan T Bars Collection.jpeg"
+                alt="Plan T bars"
+                className="w-full h-96 object-cover object-center brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-7 flex items-end justify-between">
