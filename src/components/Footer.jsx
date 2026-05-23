@@ -15,8 +15,20 @@ export const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img src="/logo.png" alt="Plan T Logo" className="h-10 w-auto object-contain" />
-              <span className="text-2xl font-bold text-white">
-                PLAN <span className="text-amber-500">T</span>
+              <span className="text-2xl font-bold tracking-widest text-white">
+                PLAN{' '}
+                <span
+                  className="text-3xl font-black"
+                  style={{
+                    fontFamily: "'Georgia', 'Times New Roman', serif",
+                    letterSpacing: '0.05em',
+                    background: 'linear-gradient(160deg, #E8C96A 0%, #C9A84C 45%, #A07828 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    filter: 'drop-shadow(0 0 8px rgba(201,168,76,0.5)) drop-shadow(0 1px 2px rgba(0,0,0,0.8))',
+                  }}
+                >T</span>
               </span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">

@@ -68,11 +68,13 @@ export const Navbar = () => {
               <span
                 className="text-3xl font-black"
                 style={{
+                  fontFamily: "'Georgia', 'Times New Roman', serif",
+                  letterSpacing: '0.05em',
                   background: 'linear-gradient(160deg, #E8C96A 0%, #C9A84C 45%, #A07828 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
-                  filter: 'drop-shadow(0 0 6px rgba(201,168,76,0.45))',
+                  filter: 'drop-shadow(0 0 8px rgba(201,168,76,0.5)) drop-shadow(0 1px 2px rgba(0,0,0,0.8))',
                 }}
               >T</span>
             </span>
