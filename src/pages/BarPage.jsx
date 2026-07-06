@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ChevronDown, Star } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { barsData } from '../data/barsData';
 import { MailchimpSignup } from '../components/MailchimpSignup';
 import { StarRating } from '../components/StarRating';
@@ -36,19 +36,6 @@ const faqItems = [
     a: 'Under Illinois Cottage Food Law, all home-produced food products require a county registration number. Ours is issued by Cook County.',
   },
 ];
-
-function Stars({ count }) {
-  return (
-    <span className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          className={`w-3.5 h-3.5 ${i <= count ? 'fill-amber-400 text-amber-400' : 'fill-gray-700 text-gray-700'}`}
-        />
-      ))}
-    </span>
-  );
-}
 
 export const BarPage = () => {
   const { barId } = useParams();
@@ -114,15 +101,6 @@ export const BarPage = () => {
                   </span>
                 ))}
               </div>
-
-              {/* Reviews summary */}
-              {bar.reviews?.length > 0 && (
-                <div className="flex items-center gap-3">
-                  <Stars count={5} />
-                  <span className="text-white font-bold text-sm">4.8</span>
-                  <span className="text-gray-600 text-sm">({bar.reviews.length} reviews)</span>
-                </div>
-              )}
             </div>
 
             {/* Right: product label image */}
@@ -402,31 +380,6 @@ export const BarPage = () => {
           </div>
         </div>
       </section>
-
-      {/* ── Customer Reviews ─────────────────────────────────────────── */}
-      {bar.reviews?.length > 0 && (
-        <section className="py-14 border-b border-gray-900">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase mb-8">
-              Customer Reviews
-            </h3>
-            <div className="space-y-4">
-              {bar.reviews.map((review, idx) => (
-                <div key={idx} className="bg-zinc-900/50 rounded-2xl p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <div>
-                      <span className="text-white font-bold text-sm">{review.name}</span>
-                      <span className="text-gray-600 text-sm"> — {review.location}</span>
-                    </div>
-                    <Stars count={review.stars} />
-                  </div>
-                  <p className="text-gray-400 text-sm leading-relaxed">{review.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* ── You Might Also Like ──────────────────────────────────────── */}
       <section className="py-14 border-b border-gray-900">

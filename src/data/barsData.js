@@ -22,11 +22,6 @@ export const barsData = {
       { name: 'Vitamin E',       source: 'Almonds',                  description: 'A fat-soluble vitamin found in almonds' },
       { name: 'Healthy Fats',    source: 'Almonds and coconut oil',  description: 'MCTs from coconut oil and monounsaturated fats from almonds' },
     ],
-    reviews: [
-      { name: 'Marcus T.', location: 'Chicago',    stars: 5, body: 'Clean label, tastes great. The beet flavour is subtle and earthy without being overpowering. Finally a bar I can actually read the label on.' },
-      { name: 'James R.',  location: 'Naperville', stars: 5, body: 'Six ingredients I can actually pronounce. Been eating one every morning before the gym for the past month.' },
-      { name: 'David K.',  location: 'Evanston',   stars: 4, body: 'Really solid bar. Dense and filling. The ingredient list is unmatched — nothing hidden.' },
-    ],
     ingredients: [
       {
         name: 'Dates', percentage: 45,
@@ -96,11 +91,6 @@ export const barsData = {
       { name: 'Omega-3',          source: 'Hemp seeds',             description: 'An essential fatty acid found in plant sources' },
       { name: 'Copper',           source: 'Cashews',                description: 'A trace mineral naturally present in cashews' },
       { name: 'Vitamin K',        source: 'Spinach',                description: 'A fat-soluble vitamin found in leafy greens' },
-    ],
-    reviews: [
-      { name: 'Alex M.',  location: 'Oak Park',    stars: 5, body: 'The cleanest bar I\'ve found. Love the light, grassy flavour — nothing artificial or overly sweet.' },
-      { name: 'Tyler B.', location: 'Chicago',     stars: 5, body: 'Hemp seeds and cashews make it surprisingly filling. Great before a long morning.' },
-      { name: 'Ryan S.',  location: 'Wicker Park', stars: 4, body: 'Subtle and understated. Not what I expected from a green bar — way more flavour than the colour suggests.' },
     ],
     ingredients: [
       {
@@ -172,11 +162,6 @@ export const barsData = {
       { name: 'Enzymes',   source: 'Raw honey',           description: 'Naturally occurring enzymes present in unprocessed honey' },
       { name: 'Magnesium', source: 'Almonds',             description: 'A mineral naturally abundant in almonds' },
     ],
-    reviews: [
-      { name: 'Daniel O.', location: 'Chicago',  stars: 5, body: 'The turmeric and ginger hit is real. Warm, spiced, and satisfying — unlike anything else out there.' },
-      { name: 'Kevin H.',  location: 'Lakeview', stars: 5, body: 'I was sceptical about the spice combination but it works beautifully. The honey ties it all together.' },
-      { name: 'Sam P.',    location: 'Pilsen',   stars: 4, body: 'Strong flavour profile — not for everyone but exactly what it says on the label. Real ingredients, real taste.' },
-    ],
     ingredients: [
       {
         name: 'Dates', percentage: 40,
@@ -247,11 +232,6 @@ export const barsData = {
       { name: 'Healthy Fats', source: 'Brazil nuts',   description: 'High in oleic and linoleic fatty acids' },
       { name: 'Vitamin C',    source: 'Pomegranate',   description: 'A water-soluble vitamin naturally present in pomegranate' },
     ],
-    reviews: [
-      { name: 'Chris V.',  location: 'Lincoln Park', stars: 5, body: 'The maca adds something I\'ve never tasted in a bar before. Complex and genuinely interesting.' },
-      { name: 'Jordan L.', location: 'Chicago',      stars: 5, body: 'Brazil nuts and pomegranate is a combination that somehow works perfectly. Rich and deeply fruity.' },
-      { name: 'Matt W.',   location: 'Hyde Park',    stars: 4, body: 'Deep, fruity, and rich. The most distinctive bar in the line.' },
-    ],
     ingredients: [
       {
         name: 'Dates', percentage: 42,
@@ -321,11 +301,6 @@ export const barsData = {
       { name: 'Theobromine',            source: 'Cacao',                 description: 'A naturally occurring alkaloid found in cacao' },
       { name: 'Iron',                   source: 'Maca powder and cacao', description: 'A mineral naturally present in maca root and cacao' },
       { name: 'Healthy Fats',           source: 'Almonds and coconut oil', description: 'A diverse fatty acid profile from two whole-food sources' },
-    ],
-    reviews: [
-      { name: 'Michael T.', location: 'Chicago',      stars: 5, body: 'The darkest, most intense bar in the line. Cacao-forward and complex — exactly what I wanted.' },
-      { name: 'Ben A.',     location: 'Logan Square', stars: 5, body: 'The sea salt finish on top is a perfect touch. Bitter, rich, and satisfying in one bite.' },
-      { name: 'Carlos M.',  location: 'Bridgeport',   stars: 4, body: 'Intense cacao flavour. Not as sweet as most bars but that\'s the point — real ingredients, real taste.' },
     ],
     ingredients: [
       {
