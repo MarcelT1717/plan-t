@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ChevronDown, Star } from 'lucide-react';
 import { barsData } from '../data/barsData';
 import { MailchimpSignup } from '../components/MailchimpSignup';
+import { StarRating } from '../components/StarRating';
+import { useBarRating } from '../hooks/useBarRating';
 
 const colorHex = {
   red:    '#ef4444',
@@ -53,6 +55,7 @@ export const BarPage = () => {
   const navigate = useNavigate();
   const bar = barsData[barId];
   const [openFaq, setOpenFaq] = useState(null);
+  const { average, count, myRating, submitRating, submitting, ready } = useBarRating(barId);
 
   if (!bar) {
     return (
@@ -153,6 +156,46 @@ export const BarPage = () => {
                 </div>
               </React.Fragment>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Rate This Bar ────────────────────────────────────────────── */}
+      <section className="py-14 border-b border-gray-900">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-zinc-900/50 rounded-2xl overflow-hidden">
+            <div className={`h-[2px] bg-gradient-to-r ${bar.color.strip}`} />
+            <div className="p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
+              <div>
+                <h3 className="text-gray-500 text-[10px] font-bold tracking-[0.3em] uppercase mb-4">
+                  Rate This Bar
+                </h3>
+                <div className="flex items-center gap-3">
+                  <span className="text-white font-black text-3xl tracking-tight">
+                    {count > 0 ? average.toFixed(1) : '—'}
+                  </span>
+                  <StarRating value={Math.round(average)} readOnly size="w-5 h-5" />
+                  <span className="text-gray-600 text-sm">
+                    {count} {count === 1 ? 'rating' : 'ratings'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-center sm:text-right">
+                {!ready ? (
+                  <p className="text-gray-600 text-xs max-w-[220px]">Ratings are coming soon.</p>
+                ) : myRating != null ? (
+                  <p className="text-gray-400 text-sm">
+                    You rated this <span className={bar.color.text}>{myRating}/5</span>. Thanks!
+                  </p>
+                ) : (
+                  <>
+                    <p className="text-gray-500 text-xs mb-3">Tried it? Leave a rating.</p>
+                    <StarRating value={0} onRate={submitRating} readOnly={submitting} />
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
