@@ -191,7 +191,7 @@ export const BarPage = () => {
                   Ingredients — Listed by Weight
                 </h3>
                 <div className="space-y-5">
-                  {bar.ingredients.map((ingredient) => (
+                  {bar.ingredients.map((ingredient, idx) => (
                     <div key={ingredient.name}>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
@@ -201,12 +201,12 @@ export const BarPage = () => {
                           />
                           <span className="text-white text-sm font-medium">{ingredient.name}</span>
                         </div>
-                        <span className="text-gray-500 text-sm font-mono">{ingredient.percentage}%</span>
+                        <span className="text-gray-500 text-sm font-mono">#{idx + 1}</span>
                       </div>
                       <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden ml-5">
                         <div
                           className="h-full rounded-full transition-all duration-700"
-                          style={{ width: `${ingredient.percentage}%`, backgroundColor: hex, opacity: 0.65 }}
+                          style={{ width: `${Math.max(100 - idx * 15, 15)}%`, backgroundColor: hex, opacity: 0.65 }}
                         />
                       </div>
                     </div>
