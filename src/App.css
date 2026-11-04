@@ -9,8 +9,8 @@ html {
 }
 
 body {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #1A1714;
+    color: #F5F1E8;
     overflow-x: hidden;
 }
 
@@ -20,14 +20,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #1A1714;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #06b6d4, #3b82f6);
+    background: linear-gradient(180deg, #E4C57E, #A9822F);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0891b2, #2563eb);
+    background: linear-gradient(180deg, #F1D79A, #D4AF65);
 }

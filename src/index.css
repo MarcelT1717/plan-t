@@ -113,3 +113,10 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Royal T serif headings: a heavier default weight. An explicit font-* class still wins. */
+@layer base {
+    .font-display {
+        font-weight: 600;
+    }
+}

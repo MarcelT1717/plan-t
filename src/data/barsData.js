@@ -1,64 +1,112 @@
+// Single source of product information for the whole site.
+// To add a flavour: add its label to public/royal-t/, any new ingredient to
+// `ingredientCatalog`, and an entry to `barsData`. Paste each bar's Shopify
+// variant ID into `shopifyVariantId` to turn on Add to Bag.
+
+export const ingredientCatalog = {
+  dates: {
+    name: 'Dates',
+    image: '/royal-t/ingredients/dates.webp',
+    description: 'Whole dates form the base of every bar, giving natural sweetness and the chewy texture that holds it together.',
+    nutrients: ['FIBRE', 'POTASSIUM', 'NATURAL SUGARS'],
+  },
+  honey: {
+    name: 'Raw Honey',
+    image: '/royal-t/ingredients/honey.webp',
+    description: 'Unpasteurised, minimally filtered honey. Adds a floral sweetness and helps bind the bar.',
+    nutrients: ['NATURAL SUGARS', 'TRACE MINERALS'],
+    note: 'Bee product',
+  },
+  royalJelly: {
+    name: 'Royal Jelly',
+    image: '/royal-t/ingredients/royalJelly.webp',
+    description: 'A creamy substance produced by worker honeybees to feed young larvae and the queen. Used in small amounts for a rich, slightly tangy note.',
+    nutrients: ['PROTEIN', 'B-VITAMINS'],
+    note: 'Bee product',
+  },
+  beets: {
+    name: 'Beets',
+    image: '/royal-t/ingredients/beets.webp',
+    description: 'Beetroot, dried and ground. Earthy, gently sweet and the source of Red\'s deep colour.',
+    nutrients: ['FOLATE', 'FIBRE'],
+  },
+  pomegranate: {
+    name: 'Pomegranate',
+    image: '/royal-t/ingredients/pomegranate.webp',
+    description: 'Tart and jewel-bright, pomegranate gives Purple its fruity flavour and colour.',
+    nutrients: ['POLYPHENOLS', 'VITAMIN C'],
+  },
+  turmeric: {
+    name: 'Turmeric',
+    image: '/royal-t/ingredients/turmeric.webp',
+    description: 'Ground turmeric root. Warm, earthy and responsible for Orange\'s golden hue.',
+    nutrients: ['CURCUMIN', 'MANGANESE'],
+  },
+  almonds: {
+    name: 'Almonds',
+    image: '/royal-t/ingredients/almonds.webp',
+    description: 'Whole almonds for crunch and a mild, buttery flavour.',
+    nutrients: ['VITAMIN E', 'MAGNESIUM'],
+    note: 'Tree nut',
+  },
+  brazilNuts: {
+    name: 'Brazil Nuts',
+    image: '/royal-t/ingredients/brazilNuts.webp',
+    description: 'Rich, creamy Brazil nuts with a distinctly buttery flavour.',
+    nutrients: ['SELENIUM', 'MAGNESIUM'],
+    note: 'Tree nut',
+  },
+  cashews: {
+    name: 'Cashews',
+    image: '/royal-t/ingredients/cashews.webp',
+    description: 'Mild, creamy cashews that give Orange a smooth, rounded bite.',
+    nutrients: ['COPPER', 'MAGNESIUM'],
+    note: 'Tree nut',
+  },
+};
+
+const ingredientList = (keys) =>
+  keys.map((key) => ({ key, ...ingredientCatalog[key] }));
+
+const shared = {
+  name: 'Royal T',
+  subtitle: "Men's Nutrition Bar",
+  status: 'Coming Soon',
+  netWeight: '2.1 oz (60 g)',
+  produced: '7/10/2026',
+  registration: '26-437',
+  tags: ['Whole Food', 'Five Ingredients', 'No Artificial Additives', 'Small Batch', 'Handcrafted'],
+};
+
 export const barsData = {
   red: {
+    ...shared,
     id: 'red',
-    name: 'Plan T',
     variant: 'RED',
-    subtitle: "Men's Nutrition Bar",
-    tagline: 'Dates · Almonds · Pumpkin Seeds · Beets',
+    flavor: 'Beetroot',
+    hex: '#A62D3B',
+    label: '/royal-t/label-red.webp',
+    // Product shot of the wrapped bar for the homepage hero. Add one per flavour;
+    // flavours without one fall back to their label artwork.
+    packImage: '/royal-t/pack-red.png',
+    productImage: '/royal-t/label-red.webp',
+    // Surface texture for the 3D unwrapped bar (cropped from the product photo).
+    rawBar: '/royal-t/raw-bar-red.webp',
+    shopifyVariantId: '', // e.g. 'gid://shopify/ProductVariant/1234567890'
+    featured: 'beets',
+    nut: 'almonds',
+    tagline: 'Dates · Beets · Almonds · Raw Honey · Royal Jelly',
     description:
-      'Rich and earthy with a deep, satisfying bite. Built on whole Medjool dates and beets, with almonds and pumpkin seeds for texture and a clean finish of coconut oil and sea salt.',
-    status: 'Coming Soon',
-    netWeight: '1.8 oz (50g)',
-    registration: '26-437',
-    allergens: 'Contains: Tree Nuts (Almonds)',
-    keyMineral: 'Zinc',
-    productImage: '/Plan T Red Individual.png',
-    tags: ['Whole Food', 'No Artificial Additives', '6 Ingredients', 'Small Batch', 'Handcrafted'],
+      'Earthy and gently sweet. Beetroot brings a deep red colour and rich flavour, with almonds for crunch and raw honey and royal jelly rounding it out.',
+    allergens: 'Contains: Tree Nuts (Almonds). Contains bee products (raw honey, royal jelly).',
+    ingredients: ingredientList(['dates', 'beets', 'almonds', 'honey', 'royalJelly']),
     keyNutrients: [
-      { name: 'Zinc',            source: 'Pumpkin seeds and almonds', description: 'An essential trace mineral found in pumpkin seeds and almonds' },
-      { name: 'Magnesium',       source: 'Almonds and pumpkin seeds', description: 'A mineral naturally abundant in nuts and seeds' },
-      { name: 'Natural Nitrates',source: 'Beets',                    description: 'Naturally occurring compounds found in beets' },
-      { name: 'Boron',           source: 'Dates',                    description: 'A trace mineral naturally present in whole foods' },
-      { name: 'Vitamin E',       source: 'Almonds',                  description: 'A fat-soluble vitamin found in almonds' },
-      { name: 'Healthy Fats',    source: 'Almonds and coconut oil',  description: 'MCTs from coconut oil and monounsaturated fats from almonds' },
-    ],
-    ingredients: [
-      {
-        name: 'Dates', percentage: 45,
-        role: 'Base & Binder',
-        description: 'Whole Medjool dates — soft, naturally sweet, and unrefined. The foundation of every bar and the only sweetener used.',
-        nutrients: ['NATURAL SUGARS', 'FIBRE', 'POTASSIUM', 'MAGNESIUM'],
-      },
-      {
-        name: 'Almonds', percentage: 22,
-        role: 'Texture',
-        description: 'Whole blanched almonds for a satisfying crunch and a mild, buttery flavour that runs throughout every bite.',
-        nutrients: ['VITAMIN E', 'HEALTHY FATS', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Pumpkin Seeds', percentage: 18,
-        role: 'Texture',
-        description: 'Whole pumpkin seeds scattered throughout. Lightly nutty with a satisfying bite and a naturally mineral-dense profile.',
-        nutrients: ['ZINC', 'OMEGA-3', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Beets', percentage: 12,
-        role: 'Flavour & Colour',
-        description: 'Whole beetroot dried and ground to a fine powder. Earthy, slightly sweet, and the source of the bar\'s deep red colour.',
-        nutrients: ['FOLATE', 'IRON', 'VITAMIN C', 'FIBRE'],
-      },
-      {
-        name: 'Coconut Oil', percentage: 2,
-        role: 'Binding Fat',
-        description: 'Unrefined cold-pressed coconut oil. Holds the bar together and adds a subtle, clean richness.',
-        nutrients: ['MCT', 'HEALTHY FATS', 'LAURIC ACID'],
-      },
-      {
-        name: 'Salt', percentage: 1,
-        role: 'Finish',
-        description: 'A touch of sea salt to balance the natural sweetness of the dates and bring all the flavours into focus.',
-        nutrients: ['SODIUM', 'TRACE MINERALS'],
-      },
+      { name: 'Fibre',           source: 'Dates',            description: 'Naturally present in whole dates' },
+      { name: 'Potassium',       source: 'Dates',            description: 'A mineral naturally found in dates' },
+      { name: 'Folate',          source: 'Beets',            description: 'A B-vitamin naturally found in beetroot' },
+      { name: 'Vitamin E',       source: 'Almonds',          description: 'A fat-soluble vitamin found in almonds' },
+      { name: 'Magnesium',       source: 'Almonds',          description: 'A mineral naturally abundant in nuts' },
+      { name: 'Natural Sugars',  source: 'Dates and honey',  description: 'The only sweeteners in the bar' },
     ],
     color: {
       strip:  'from-red-900 via-red-500 to-red-900',
@@ -69,206 +117,31 @@ export const barsData = {
     },
   },
 
-  green: {
-    id: 'green',
-    name: 'Plan T',
-    variant: 'GREEN',
-    subtitle: "Men's Nutrition Bar",
-    tagline: 'Dates · Almonds · Pumpkin Seeds · Spinach',
-    description:
-      'Clean, light, and grassy with a naturally mellow sweetness. Dates and almonds form the base, with spinach bringing an earthy depth and pumpkin seeds adding a light, nutty crunch.',
-    status: 'Coming Soon',
-    netWeight: '1.8 oz (50g)',
-    registration: '26-437',
-    allergens: 'Contains: Tree Nuts (Almonds)',
-    keyMineral: 'Magnesium',
-    productImage: '/Plan T Green Individual.png',
-    tags: ['Whole Food', 'No Artificial Additives', '6 Ingredients', 'Small Batch', 'Handcrafted'],
-    keyNutrients: [
-      { name: 'Zinc',       source: 'Pumpkin seeds and almonds', description: 'An essential trace mineral found in pumpkin seeds and almonds' },
-      { name: 'Magnesium',  source: 'Almonds and pumpkin seeds', description: 'A mineral naturally abundant in nuts and seeds' },
-      { name: 'Iron',       source: 'Spinach',                   description: 'A mineral naturally found in dark leafy greens' },
-      { name: 'Vitamin E',  source: 'Almonds',                   description: 'A fat-soluble vitamin naturally found in almonds' },
-      { name: 'Folate',     source: 'Spinach',                   description: 'A B-vitamin naturally present in leafy greens' },
-      { name: 'Vitamin K',  source: 'Spinach',                   description: 'A fat-soluble vitamin found in leafy greens' },
-    ],
-    ingredients: [
-      {
-        name: 'Dates', percentage: 42,
-        role: 'Base & Binder',
-        description: 'Whole Medjool dates — the natural binder and sole sweetener. Soft, rich, and entirely unrefined.',
-        nutrients: ['NATURAL SUGARS', 'FIBRE', 'POTASSIUM', 'MAGNESIUM'],
-      },
-      {
-        name: 'Almonds', percentage: 28,
-        role: 'Base',
-        description: 'Whole blanched almonds for a satisfying crunch and a mild, buttery flavour that lets the spinach speak.',
-        nutrients: ['VITAMIN E', 'HEALTHY FATS', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Pumpkin Seeds', percentage: 15,
-        role: 'Texture',
-        description: 'Whole pumpkin seeds scattered throughout for a lightly nutty crunch and a naturally mineral-dense profile.',
-        nutrients: ['ZINC', 'OMEGA-3', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Spinach', percentage: 12,
-        role: 'Flavour & Colour',
-        description: 'Whole spinach leaves dried and ground. Mild, earthy, and the source of the bar\'s distinctive green colour.',
-        nutrients: ['IRON', 'VITAMIN K', 'FOLATE', 'MAGNESIUM'],
-      },
-      {
-        name: 'Coconut Oil', percentage: 2,
-        role: 'Binding Fat',
-        description: 'Unrefined cold-pressed coconut oil for binding and a clean, subtle richness.',
-        nutrients: ['MCT', 'HEALTHY FATS', 'LAURIC ACID'],
-      },
-      {
-        name: 'Salt', percentage: 1,
-        role: 'Finish',
-        description: 'Sea salt to balance the natural sweetness and bring out the full flavour of each ingredient.',
-        nutrients: ['SODIUM', 'TRACE MINERALS'],
-      },
-    ],
-    color: {
-      strip:  'from-green-900 via-green-500 to-green-900',
-      text:   'text-green-400',
-      border: 'border-green-500/40',
-      glow:   'green-500/8',
-      badge:  'bg-green-500/10 border-green-500/30 text-green-400',
-    },
-  },
-
-  orange: {
-    id: 'orange',
-    name: 'Plan T',
-    variant: 'ORANGE',
-    subtitle: "Men's Nutrition Bar",
-    tagline: 'Dates · Almonds · Turmeric · Ginger · Raw Honey',
-    description:
-      'Warm, spiced, and lightly sweet. Turmeric and ginger give it a bold, aromatic heat while dates and raw honey provide natural sweetness, and almonds round it out with crunch and body.',
-    status: 'Coming Soon',
-    netWeight: '1.8 oz (50g)',
-    registration: '26-437',
-    allergens: 'Contains: Tree Nuts (Almonds)',
-    keyMineral: 'Manganese',
-    productImage: '/Plan T Orange Individual.png',
-    tags: ['Whole Food', 'No Artificial Additives', '6 Ingredients', 'Small Batch', 'Handcrafted'],
-    keyNutrients: [
-      { name: 'Curcumin',  source: 'Turmeric',           description: 'The primary active compound naturally found in turmeric root' },
-      { name: 'Gingerol',  source: 'Ginger root',         description: 'The main bioactive compound naturally present in ginger' },
-      { name: 'Vitamin E', source: 'Almonds',             description: 'A fat-soluble vitamin naturally found in almonds' },
-      { name: 'Manganese', source: 'Turmeric and ginger', description: 'An essential trace mineral found in spices and nuts' },
-      { name: 'Enzymes',   source: 'Raw honey',           description: 'Naturally occurring enzymes present in unprocessed honey' },
-      { name: 'Magnesium', source: 'Almonds',             description: 'A mineral naturally abundant in almonds' },
-    ],
-    ingredients: [
-      {
-        name: 'Dates', percentage: 40,
-        role: 'Base & Binder',
-        description: 'Whole Medjool dates — the structural base of the bar and its primary unrefined sweetener.',
-        nutrients: ['NATURAL SUGARS', 'FIBRE', 'POTASSIUM', 'MAGNESIUM'],
-      },
-      {
-        name: 'Almonds', percentage: 28,
-        role: 'Texture & Body',
-        description: 'Whole blanched almonds for structure, crunch, and a mild neutral base that lets the spices lead.',
-        nutrients: ['VITAMIN E', 'HEALTHY FATS', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Turmeric', percentage: 16,
-        role: 'Spice & Colour',
-        description: 'Whole ground turmeric root. Earthy, slightly bitter, and responsible for the bar\'s warm golden hue.',
-        nutrients: ['CURCUMIN', 'MANGANESE', 'IRON', 'ANTIOXIDANTS'],
-      },
-      {
-        name: 'Ginger', percentage: 8,
-        role: 'Spice',
-        description: 'Whole dried ginger root. Warm, fiery, and aromatic — pairs naturally with turmeric to build a complex spice profile.',
-        nutrients: ['GINGEROL', 'SHOGAOL', 'ANTIOXIDANTS', 'MINERALS'],
-      },
-      {
-        name: 'Raw Honey', percentage: 6,
-        role: 'Sweetener',
-        description: 'Unfiltered, unheated raw honey. Floral and complex — adds a gentle sweetness and helps bind the bar.',
-        nutrients: ['NATURAL SUGARS', 'ENZYMES', 'ANTIOXIDANTS', 'TRACE MINERALS'],
-      },
-      {
-        name: 'Salt', percentage: 2,
-        role: 'Finish',
-        description: 'Sea salt to cut through the sweetness and sharpen the warm spice notes.',
-        nutrients: ['SODIUM', 'TRACE MINERALS'],
-      },
-    ],
-    color: {
-      strip:  'from-orange-900 via-orange-500 to-orange-900',
-      text:   'text-orange-400',
-      border: 'border-orange-500/40',
-      glow:   'orange-500/8',
-      badge:  'bg-orange-500/10 border-orange-500/30 text-orange-400',
-    },
-  },
-
   purple: {
+    ...shared,
     id: 'purple',
-    name: 'Plan T',
     variant: 'PURPLE',
-    subtitle: "Men's Nutrition Bar",
-    tagline: 'Dates · Brazil Nuts · Maca · Pomegranate · Raw Honey',
+    flavor: 'Pomegranate',
+    hex: '#7745A0',
+    label: '/royal-t/label-purple.webp',
+    packImage: '/royal-t/pack-purple.png',
+    productImage: '/royal-t/label-purple.webp',
+    rawBar: '/royal-t/raw-bar-purple.webp', // recoloured from the Red photo until a Purple photo exists
+    shopifyVariantId: '', // e.g. 'gid://shopify/ProductVariant/1234567890'
+    featured: 'pomegranate',
+    nut: 'brazilNuts',
+    tagline: 'Dates · Pomegranate · Brazil Nuts · Raw Honey · Royal Jelly',
     description:
-      'Deep, fruity, and distinctly rich. Pomegranate and raw honey sit over a base of Medjool dates and Brazil nuts, with maca adding an earthy, malty depth unlike any other bar in the line.',
-    status: 'Coming Soon',
-    netWeight: '1.8 oz (50g)',
-    registration: '26-437',
-    allergens: 'Contains: Tree Nuts (Brazil Nuts)',
-    keyMineral: 'Selenium',
-    productImage: '/Plan T Purple Individual.png',
-    tags: ['Whole Food', 'No Artificial Additives', '6 Ingredients', 'Small Batch', 'Handcrafted'],
+      'Bright, tart and rich. Pomegranate sits over a base of dates and creamy Brazil nuts, finished with raw honey and royal jelly.',
+    allergens: 'Contains: Tree Nuts (Brazil Nuts). Contains bee products (raw honey, royal jelly).',
+    ingredients: ingredientList(['dates', 'pomegranate', 'brazilNuts', 'honey', 'royalJelly']),
     keyNutrients: [
-      { name: 'Selenium',     source: 'Brazil nuts',   description: 'One of the most selenium-dense whole foods available' },
-      { name: 'Ellagic Acid', source: 'Pomegranate',   description: 'A polyphenol naturally unique to pomegranate' },
-      { name: 'Punicalagins', source: 'Pomegranate',   description: 'Antioxidant compounds naturally found in pomegranate' },
-      { name: 'Amino Acids',  source: 'Maca',          description: 'Naturally occurring protein building blocks in maca root' },
-      { name: 'Healthy Fats', source: 'Brazil nuts',   description: 'High in oleic and linoleic fatty acids' },
-      { name: 'Vitamin C',    source: 'Pomegranate',   description: 'A water-soluble vitamin naturally present in pomegranate' },
-    ],
-    ingredients: [
-      {
-        name: 'Dates', percentage: 42,
-        role: 'Base & Binder',
-        description: 'Whole Medjool dates — soft, caramel-sweet, and the structural core that holds every bar together.',
-        nutrients: ['NATURAL SUGARS', 'FIBRE', 'POTASSIUM', 'MAGNESIUM'],
-      },
-      {
-        name: 'Brazil Nuts', percentage: 28,
-        role: 'Base',
-        description: 'Whole Brazil nuts with a rich, creamy texture and a distinctly buttery flavour. One of the densest whole-food nuts available.',
-        nutrients: ['SELENIUM', 'HEALTHY FATS', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Maca', percentage: 14,
-        role: 'Flavour Depth',
-        description: 'Whole maca root dried and ground. Earthy and malty with a subtle sweetness — the most distinctive ingredient in the line.',
-        nutrients: ['AMINO ACIDS', 'IRON', 'CALCIUM', 'B-VITAMINS'],
-      },
-      {
-        name: 'Pomegranate', percentage: 12,
-        role: 'Flavour & Colour',
-        description: 'Whole pomegranate dried and ground. Tart, jewel-bright, and intensely fruity — gives the bar its deep purple hue.',
-        nutrients: ['ELLAGIC ACID', 'PUNICALAGINS', 'VITAMIN C', 'ANTIOXIDANTS'],
-      },
-      {
-        name: 'Raw Honey', percentage: 3,
-        role: 'Sweetener',
-        description: 'Unfiltered raw honey for binding and a layered natural sweetness that complements the pomegranate tartness.',
-        nutrients: ['NATURAL SUGARS', 'ENZYMES', 'ANTIOXIDANTS', 'TRACE MINERALS'],
-      },
-      {
-        name: 'Salt', percentage: 1,
-        role: 'Finish',
-        description: 'Sea salt to balance the fruit-forward profile and bring out the depth of the nuts.',
-        nutrients: ['SODIUM', 'TRACE MINERALS'],
-      },
+      { name: 'Fibre',             source: 'Dates',            description: 'Naturally present in whole dates' },
+      { name: 'Potassium',         source: 'Dates',            description: 'A mineral naturally found in dates' },
+      { name: 'Selenium',          source: 'Brazil nuts',      description: 'Brazil nuts are one of the richest food sources of selenium' },
+      { name: 'Polyphenols',       source: 'Pomegranate',      description: 'Plant compounds naturally found in pomegranate' },
+      { name: 'Unsaturated Fats',  source: 'Brazil nuts',      description: 'The main type of fat in Brazil nuts' },
+      { name: 'Natural Sugars',    source: 'Dates and honey',  description: 'The only sweeteners in the bar' },
     ],
     color: {
       strip:  'from-purple-900 via-purple-500 to-purple-900',
@@ -279,73 +152,129 @@ export const barsData = {
     },
   },
 
-  black: {
-    id: 'black',
-    name: 'Plan T',
-    variant: 'BLACK',
-    subtitle: "Men's Nutrition Bar",
-    tagline: 'Dates · Almonds · Cacao · Maca Powder · Coconut Oil',
+  orange: {
+    ...shared,
+    id: 'orange',
+    variant: 'ORANGE',
+    flavor: 'Turmeric',
+    hex: '#D77A24',
+    label: '/royal-t/label-orange.webp',
+    packImage: '/royal-t/pack-orange.png',
+    productImage: '/royal-t/label-orange.webp',
+    rawBar: '/royal-t/raw-bar-orange.webp', // recoloured from the Red photo until an Orange photo exists
+    shopifyVariantId: '', // e.g. 'gid://shopify/ProductVariant/1234567890'
+    featured: 'turmeric',
+    nut: 'cashews',
+    tagline: 'Dates · Turmeric · Cashews · Raw Honey · Royal Jelly',
     description:
-      'Intense, dark, and deeply satisfying. Cacao leads with its natural bitterness, layered with maca powder and almonds, all bound with Medjool dates and coconut oil. Finished with flaked sea salt.',
-    status: 'Coming Soon',
-    netWeight: '1.8 oz (50g)',
-    registration: '26-437',
-    allergens: 'Contains: Tree Nuts (Almonds)',
-    keyMineral: 'Magnesium',
-    productImage: '/Plan T Black Individual.png',
-    tags: ['Whole Food', 'No Artificial Additives', '6 Ingredients', 'Small Batch', 'Handcrafted'],
+      'Warm and golden. Turmeric gives an earthy, aromatic depth, with smooth cashews, dates, raw honey and royal jelly.',
+    allergens: 'Contains: Tree Nuts (Cashews). Contains bee products (raw honey, royal jelly).',
+    ingredients: ingredientList(['dates', 'turmeric', 'cashews', 'honey', 'royalJelly']),
     keyNutrients: [
-      { name: 'Magnesium',              source: 'Cacao and maca powder', description: 'One of the richest dietary sources of magnesium' },
-      { name: 'Flavonoids',             source: 'Cacao',                 description: 'Key phytochemicals naturally present in whole cacao' },
-      { name: 'Adaptogenic Compounds',  source: 'Maca powder',           description: 'Naturally occurring compounds found in maca root' },
-      { name: 'Theobromine',            source: 'Cacao',                 description: 'A naturally occurring alkaloid found in cacao' },
-      { name: 'Iron',                   source: 'Maca powder and cacao', description: 'A mineral naturally present in maca root and cacao' },
-      { name: 'Healthy Fats',           source: 'Almonds and coconut oil', description: 'A diverse fatty acid profile from two whole-food sources' },
-    ],
-    ingredients: [
-      {
-        name: 'Dates', percentage: 35,
-        role: 'Base & Binder',
-        description: 'Whole Medjool dates — the binding agent and only sweetener. Used sparingly to let the cacao lead.',
-        nutrients: ['NATURAL SUGARS', 'FIBRE', 'POTASSIUM', 'MAGNESIUM'],
-      },
-      {
-        name: 'Almonds', percentage: 25,
-        role: 'Crunch',
-        description: 'Whole blanched almonds for structure and a clean, neutral crunch against the soft cacao base.',
-        nutrients: ['VITAMIN E', 'HEALTHY FATS', 'MAGNESIUM', 'PROTEIN'],
-      },
-      {
-        name: 'Cacao', percentage: 20,
-        role: 'Dominant Flavour',
-        description: 'Minimally processed whole cacao. Deeply bitter, complex, and roasted — the defining flavour of this bar.',
-        nutrients: ['FLAVONOIDS', 'THEOBROMINE', 'MAGNESIUM', 'IRON'],
-      },
-      {
-        name: 'Maca Powder', percentage: 15,
-        role: 'Depth',
-        description: 'Whole maca root dried and ground. Earthy, malty, and subtly sweet — adds body and a layer of complexity to the cacao base.',
-        nutrients: ['IRON', 'CALCIUM', 'AMINO ACIDS', 'B-VITAMINS'],
-      },
-      {
-        name: 'Coconut Oil', percentage: 4,
-        role: 'Binding Fat',
-        description: 'Unrefined cold-pressed coconut oil. Holds the bar together and adds a subtle depth that complements the cacao.',
-        nutrients: ['MCT', 'HEALTHY FATS', 'LAURIC ACID'],
-      },
-      {
-        name: 'Sea Salt', percentage: 1,
-        role: 'Finish',
-        description: 'Flaked sea salt on the surface. Cuts the bitterness and brings every flavour into sharp focus.',
-        nutrients: ['SODIUM', 'TRACE MINERALS'],
-      },
+      { name: 'Fibre',           source: 'Dates',            description: 'Naturally present in whole dates' },
+      { name: 'Potassium',       source: 'Dates',            description: 'A mineral naturally found in dates' },
+      { name: 'Curcumin',        source: 'Turmeric',         description: 'The compound that gives turmeric its colour' },
+      { name: 'Copper',          source: 'Cashews',          description: 'A trace mineral naturally found in cashews' },
+      { name: 'Magnesium',       source: 'Cashews',          description: 'A mineral naturally abundant in nuts' },
+      { name: 'Natural Sugars',  source: 'Dates and honey',  description: 'The only sweeteners in the bar' },
     ],
     color: {
-      strip:  'from-zinc-700 via-zinc-400 to-zinc-700',
-      text:   'text-zinc-300',
-      border: 'border-zinc-500/40',
-      glow:   'zinc-500/8',
-      badge:  'bg-zinc-500/10 border-zinc-500/30 text-zinc-300',
+      strip:  'from-orange-900 via-orange-500 to-orange-900',
+      text:   'text-orange-400',
+      border: 'border-orange-500/40',
+      glow:   'orange-500/8',
+      badge:  'bg-orange-500/10 border-orange-500/30 text-orange-400',
     },
   },
 };
+
+export const flavorIds = Object.keys(barsData);
+
+// "The Ingredient" feature on the homepage. Swap `image` paths for better
+// photography when you have it; a card with `composition` draws a chart instead.
+export const royalJellyFeature = {
+  eyebrow: 'The Ingredient',
+  headline: 'Royal jelly. Made by the hive, folded into every bar.',
+  intro: 'The rare, creamy food honeybees make for their young and their queen, and the ingredient Royal T is named for.',
+  cards: [
+    {
+      title: 'What it is',
+      tag: 'Made by honeybees',
+      image: '/royal-t/ingredients/royalJelly.webp',
+      body: 'A creamy, slightly tangy substance produced by worker honeybees to feed young larvae. The queen bee eats it for her whole life.',
+    },
+    {
+      title: 'How it\'s collected',
+      tag: 'Gathered by hand',
+      image: '/royal-t/ingredients/honey.webp',
+      body: 'Beekeepers gather it from special cells inside the hive, a fraction of a gram at a time, then keep it cold so it stays fresh.',
+    },
+    {
+      // Describe what royal jelly contains and why people seek it out; don't claim
+      // it treats, prevents or improves anything.
+      title: 'Why people take it',
+      tag: 'Protein · B-vitamins · 10-HDA',
+      // TODO: swap for a dedicated photo; this reuses card 1's, mirrored.
+      image: '/royal-t/ingredients/royalJelly.webp',
+      mirror: true,
+      body: 'Prized for centuries and still being researched, royal jelly carries protein, B-vitamins and 10-HDA, a fatty acid found almost nowhere else in nature. Not suitable for anyone allergic to bees, honey or pollen.',
+    },
+  ],
+};
+
+// "The Difference" comparison on the homepage. Keep every Royal T entry something
+// you can stand behind, and keep competitor columns general ("typical", "often").
+// Add calories / sugar rows once you have lab-verified nutrition facts.
+export const comparison = {
+  eyebrow: 'The Difference',
+  headline: 'Same snack. Shorter label.',
+  intro: 'No isolates, no fillers, nothing to decode. Just the five ingredients that make the bar.',
+  columns: ['Royal T', 'Typical protein bar', 'Typical candy bar'],
+  rows: [
+    { label: 'Ingredients', values: ['5', 'Often 15 or more', 'Often 10 or more'], check: false },
+    { label: 'Sweetened with', values: ['Dates & raw honey', 'Sugar alcohols or sucralose', 'Sugar & corn syrup'], check: true },
+    { label: 'Protein isolates', values: ['None', 'Usually', 'Rarely'], check: true },
+    { label: 'Artificial flavors or colors', values: ['None', 'Often', 'Often'], check: true },
+    { label: 'Every ingredient on the front', values: ['Yes', 'Rarely', 'Rarely'], check: true },
+    { label: 'Made', values: ['By hand, small batches', 'Mass-produced', 'Mass-produced'], check: true },
+  ],
+  footnote: 'Comparisons describe typical products in each category; individual brands vary.',
+};
+
+// "How to Enjoy" timeline on the homepage. Keep these about when and how to eat
+// a bar; avoid health or performance claims.
+export const howToEnjoy = {
+  eyebrow: 'How to Enjoy',
+  headline: ['One for the morning.', 'One for the road.'],
+  intro: 'Every bar is the same five ingredients, made by hand in small batches. Nothing to mix, measure or scoop. Unwrap it whenever you want real food fast.',
+  pills: ['Five ingredients', 'No preservatives', 'Contains tree nuts & bee products'],
+  steps: [
+    {
+      time: '7 AM',
+      title: 'Breakfast',
+      lead: 'Dates, honey and nuts. Nothing else.',
+      body: 'Have one with your coffee or eat it on the way out the door. Nothing to blend, nothing to measure.',
+    },
+    {
+      time: '11 AM',
+      title: 'Between meetings',
+      lead: 'Real food in a few bites.',
+      body: 'Dense and chewy, and small enough for a pocket, a desk drawer or a gym bag.',
+    },
+    {
+      time: '5 PM',
+      title: 'Before the gym',
+      lead: 'Sweetened only by dates and raw honey.',
+      body: 'No sugar alcohols, no sucralose, no syrups. Eat it on the way in.',
+    },
+    {
+      time: 'Any time',
+      title: 'On the road',
+      lead: 'No fridge needed.',
+      body: 'Best within two weeks at room temperature, or up to two months in the fridge.',
+    },
+  ],
+};
+
+// Scrolling strip under the hero.
+export const highlights = ['Five Ingredients', 'Raw Honey & Royal Jelly', 'Whole Food', 'No Artificial Additives', 'Small Batch', 'Handmade in Chicago'];

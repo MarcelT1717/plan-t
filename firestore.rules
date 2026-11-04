@@ -1,0 +1,50 @@
+rules_version = '2';
+
+// Paste into Firebase Console > Firestore Database > Rules, then Publish.
+// Each write may add exactly one rating of 1-5 stars to a known bar.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /ratings/{barId} {
+      function knownBar() {
+        return barId in ['red', 'green', 'orange', 'purple', 'black'];
+      }
+      function onlyRatingFields() {
+        return request.resource.data.keys().hasOnly(['sum', 'count']);
+      }
+
+      allow read: if knownBar();
+
+      allow create: if knownBar()
+        && onlyRatingFields()
+        && request.resource.data.count == 1
+        && request.resource.data.sum is int
+        && request.resource.data.sum >= 1
+        && request.resource.data.sum <= 5;
+
+      allow update: if knownBar()
+        && onlyRatingFields()
+        && request.resource.data.count == resource.data.count + 1
+        && request.resource.data.sum is int
+        && request.resource.data.sum - resource.data.sum >= 1
+        && request.resource.data.sum - resource.data.sum <= 5;
+
+      allow delete: if false;
+    }
+
+    // Contact form: anyone may add an inquiry; nobody can read, edit or delete
+    // them from the site. Read them in Firebase Console > Firestore > inquiries.
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'topic', 'message', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') && request.resource.data.email.size() <= 200
+        && request.resource.data.topic in ['General question', 'Ingredients & allergens', 'Wholesale & stockists', 'Press & partnerships', 'Something else']
+        && request.resource.data.message is string && request.resource.data.message.size() >= 10 && request.resource.data.message.size() <= 4000
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

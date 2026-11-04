@@ -86,6 +86,19 @@ if (isDevServer) {
   try {
     const { withVisualEdits } = require("@emergentbase/visual-edits/craco");
     webpackConfig = withVisualEdits(webpackConfig);
+
+    // The visual-edits babel plugin stamps `x-line-number` etc. onto every JSX
+    // element. React Three Fiber treats those as object properties and crashes,
+    // so apply the plugin to everything except the 3D scene.
+    const visualEditsBabel = require("@emergentbase/visual-edits/babel-plugin").default;
+    webpackConfig.babel.plugins = webpackConfig.babel.plugins.filter((p) => p !== visualEditsBabel);
+    webpackConfig.babel.loaderOptions = (options) => ({
+      ...options,
+      overrides: [
+        ...(options.overrides || []),
+        { exclude: /[\\/]components[\\/]home[\\/]ProductViewer\.tsx$/, plugins: [visualEditsBabel] },
+      ],
+    });
   } catch (err) {
     if (err.code === 'MODULE_NOT_FOUND' && err.message.includes('@emergentbase/visual-edits/craco')) {
       console.warn(
